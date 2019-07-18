@@ -6,39 +6,18 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 10:16:17 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/18 15:33:07 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/07/18 15:58:32 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /*
-**This function swaps the first two elements in a list.
-*/
-
-static void		list_swap(t_lst **list)
-{
-	t_lst	*temp;
-
-	if ((*list)->next)
-	{
-		temp = *list;
-		*list - (*list)->next;
-		temp->next = (*list)->next;
-		temp->next->prev = temp;
-		(*list)->prev = temp->prev;
-		temp->prev = *list;
-		(*list)->next = temp;
-		(*list)->prev->next = *list;
-	}
-}
-
-/*
 **sa--Swap the first 2 elements at the top of stack a.
 **Do nothing if there is only one or no elements.
 */
 
-void	sa(t_lst **stack_a, t_lst **stack_b)
+void	sa(t_lst *stack_a, t_lst *stack_b)
 {
 	int		temp;
 
@@ -47,7 +26,7 @@ void	sa(t_lst **stack_a, t_lst **stack_b)
 	temp = stack_a->head->val;
 	stack_a->head->val = stack_a->head->next->val;
 	stack_a->head->next->val = temp;
-	ps_ft_buf("sa ", stack_a, stack_b);
+	ft_buf("sa ", stack_a, stack_b);
 }
 
 /*
@@ -55,24 +34,35 @@ void	sa(t_lst **stack_a, t_lst **stack_b)
 **Do nothing if there is only one or no elements.
 */
 
-void	sb(t_lst **stack_a, t_lst **stack_b)
+void	sb(t_lst *stack_a, t_lst *stack_b)
 {
-	ft_putendl("sb");
-	if (*stack_b)
-		list_swap(stack_b);
-	(void)stack_a;
+	int	temp;
+
+	if (stack_b->head == NULL || stack_b->head->next == NULL)
+		return ;
+	temp = stack_b->head->val;
+	stack_b->head->val = stack_b->head->next->val;
+	stack_b->head->next->val = temp;
+	ft_buf("sb ", stack_a, stack_b);
 }
 
 /*
 **ss--Does sa and sb at the same time.
 */
 
-void	ss(t_lst **stack_a, t_lst **stack_b)
+void	ss(t_lst *stack_a, t_lst *stack_b)
 {
-	ft_putendl("ss");
-	if (*stack_a && *stack_b)
-	{
-		list_swap(stack_a);
-		list_swap(stack_b);
-	}
+	int		temp_a;
+	int		temp_b;
+
+	if (stack_a->head == NULL || stack_a->head->next == NULL ||
+		stack_b->head == NULL || stack_b->head->next == NULL)
+		return ;
+	temp_a = stack_a->head->val;
+	stack_a->head->val = stack_a->head->next->val;
+	stack_a->head->next->val = temp_a;
+	temp_b = stack_b->head->val;
+	stack_b->head->val = stack_b->head->next->val;
+	stack_b->head->next->val = temp_b;
+	ft_buf("ss ", stack_a, stack_b);
 }

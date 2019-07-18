@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 09:44:48 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/18 15:36:07 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/07/18 16:12:11 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 
 # include "libft/libft.h"
 # include <stdlib.h>
+
+char				header_buf[4096];
+int					header_i;
 
 typedef struct		s_node
 {
