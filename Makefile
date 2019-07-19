@@ -6,19 +6,17 @@
 #    By: tihendri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/15 16:20:46 by tihendri          #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2019/07/18 13:09:27 by tihendri         ###   ########.fr        #
+#    Updated: 2019/07/19 11:39:07 by tihendri         ###   ########.fr        #
+#                                                                              #
 #                                                                              #
 # **************************************************************************** #
 
-=======
-#    Updated: 2019/07/17 16:05:42 by tihendri         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
-NAME = checker
+NAME = push_swap
 
 CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
->>>>>>> 22f450029c12b5fcccdf3c70341428eff936d06a
+
+.PHONY: all clean fclean re norme
+
+all: $(NAME)
