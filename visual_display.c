@@ -6,13 +6,13 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 16:14:13 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/18 16:35:33 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/07/19 10:11:17 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void		ps_ft_error(void)
+void		ft_error(void)
 {
 	write(2, "Error\n", 6);
 	exit(1);
@@ -31,7 +31,7 @@ void		ft_bufset(void)
 	header_i = 0;
 }
 
-void		ft_display(t_list *stack_a, t_list *stack_b)
+void		ft_printout(t_lst *stack_a, t_lst *stack_b)
 {
 	write(1, header_buf, header_i - 1);
 	if (header_i < 4092)
@@ -39,12 +39,12 @@ void		ft_display(t_list *stack_a, t_list *stack_b)
 	ft_bufset();
 }
 
-void		ps_ft_buf(char *str, t_lst *stack_a, t_lst *stack_b)
+void		ft_buf(char *str, t_lst *stack_a, t_lst *stack_b)
 {
 	ft_strcat(header_buf, str);
 	if (ft_strlen(str) == 4)
 		header_i++;
 	header_i = header_i + 3;
 	if (header_i >= 4092)
-		ft_display(stack_a, stack_b);
+		ft_printout(stack_a, stack_b);
 }
