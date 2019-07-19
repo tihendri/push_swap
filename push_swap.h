@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 09:44:48 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/19 10:09:30 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/07/19 13:42:22 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,45 @@
 
 # include "libft/libft.h"
 # include <stdlib.h>
+# include <unistd.h>
 
-char				header_buf[4096];
-int					header_i;
+/*
+**Global variables
+*/
+
+char				g_buf[4096];
+int							g_i;
+
+/*
+**Node structure
+*/
 
 typedef struct		s_node
 {
 	struct s_node	*next;
-	int		val;
+	int				value;
 }					t_node;
+
+/*
+**List structure
+*/
 
 typedef struct		s_lst
 {
-	size_t	val;
-	size_t	coup;
-	struct	s_node	*head;
-	struct	s_node	*tail;
+	size_t			value;
+	size_t			coup;
+	struct s_node	*head;
+	struct s_node	*tail;
 }					t_lst;
 
-# define INSTRUCTIONS 11
+/*
+**from visual display
+*/
+
+void				ft_error(void);
+void				ft_bufset(void);
+void				ft_printout(t_lst *stack_a, t_lst *stack_b);
+void				ft_buf(char *str, t_lst *stack_a, t_lst *stack_b);
 
 /*
 **from moves files, instructions

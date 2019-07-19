@@ -6,11 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 10:05:43 by tihendri          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/07/18 13:10:09 by tihendri         ###   ########.fr       */
-=======
-/*   Updated: 2019/07/17 14:20:51 by tihendri         ###   ########.fr       */
->>>>>>> 22f450029c12b5fcccdf3c70341428eff936d06a
+/*   Updated: 2019/07/19 13:21:52 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,19 +46,11 @@ int			main(int argc, char **argv)
 	while (i < argc)
 	{
 		if (!ft_isnum(argv[i]))
-<<<<<<< HEAD
 			return (error_msg("Error!"));
-		c = ft_atoi(argv[i]);
-		if (c < last)
-			return (error_msg("KO!"));
-		last = c;
-=======
-			return (error_msg("Error! You've got to give me actual numbers please. Otherwise I'll be here all day..."));
 		n = ft_atoi(argv[i]);
 		if (n < last)
-			return (error_msg("KO! It didn't work mate, better luck next time"));
+			return (error_msg("KO!"));
 		last = n;
->>>>>>> 22f450029c12b5fcccdf3c70341428eff936d06a
 		i++;
 	}
 	ft_putendl("OK");

@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 10:16:17 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/18 15:58:32 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/07/19 12:53:38 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	sa(t_lst *stack_a, t_lst *stack_b)
 
 	if (stack_a->head == NULL || stack_a->head->next == NULL)
 		return ;
-	temp = stack_a->head->val;
-	stack_a->head->val = stack_a->head->next->val;
-	stack_a->head->next->val = temp;
+	temp = stack_a->head->value;
+	stack_a->head->value = stack_a->head->next->value;
+	stack_a->head->next->value = temp;
 	ft_buf("sa ", stack_a, stack_b);
 }
 
@@ -40,9 +40,9 @@ void	sb(t_lst *stack_a, t_lst *stack_b)
 
 	if (stack_b->head == NULL || stack_b->head->next == NULL)
 		return ;
-	temp = stack_b->head->val;
-	stack_b->head->val = stack_b->head->next->val;
-	stack_b->head->next->val = temp;
+	temp = stack_b->head->value;
+	stack_b->head->value = stack_b->head->next->value;
+	stack_b->head->next->value = temp;
 	ft_buf("sb ", stack_a, stack_b);
 }
 
@@ -58,11 +58,11 @@ void	ss(t_lst *stack_a, t_lst *stack_b)
 	if (stack_a->head == NULL || stack_a->head->next == NULL ||
 		stack_b->head == NULL || stack_b->head->next == NULL)
 		return ;
-	temp_a = stack_a->head->val;
-	stack_a->head->val = stack_a->head->next->val;
-	stack_a->head->next->val = temp_a;
-	temp_b = stack_b->head->val;
-	stack_b->head->val = stack_b->head->next->val;
-	stack_b->head->next->val = temp_b;
+	temp_a = stack_a->head->value;
+	stack_a->head->value = stack_a->head->next->value;
+	stack_a->head->next->value = temp_a;
+	temp_b = stack_b->head->value;
+	stack_b->head->value = stack_b->head->next->value;
+	stack_b->head->next->value = temp_b;
 	ft_buf("ss ", stack_a, stack_b);
 }

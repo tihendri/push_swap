@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 10:18:38 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/19 09:47:14 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/07/19 12:48:59 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,17 @@
 
 void				rra(t_lst *stack_a, t_lst *stack_b)
 {
-	t_node	*elem;
+	t_node	*element;
 
 	if (stack_a->head != NULL && stack_a->head != stack_a->tail)
 	{
-		elem = stack_a->head;
-		while (elem->next != stack_a->tail)
-			elem = elem->next;
-		elem->next->next = stack_a->head;
-		stack_a->head = elem->next;
-		elem->next = NULL;
-		stack_a->tail = elem;
+		element = stack_a->head;
+		while (element->next != stack_a->tail)
+			element = element->next;
+		element->next->next = stack_a->head;
+		stack_a->head = element->next;
+		element->next = NULL;
+		stack_a->tail = element;
 		ft_buf("rra ", stack_a, stack_b);
 	}
 }
@@ -41,17 +41,17 @@ void				rra(t_lst *stack_a, t_lst *stack_b)
 
 void				rrb(t_lst *stack_a, t_lst *stack_b)
 {
-	t_node	*elem;
+	t_node	*element;
 
 	if (stack_b->head != NULL && stack_b->head != stack_b->tail)
 	{
-		elem = stack_b->head;
-		while (elem->next != stack_b->tail)
-			elem = elem->next;
-		elem->next->next = stack_b->head;
-		stack_b->head = elem->next;
-		elem->next = NULL;
-		stack_b->tail = elem;
+		element = stack_b->head;
+		while (element->next != stack_b->tail)
+			element = element->next;
+		element->next->next = stack_b->head;
+		stack_b->head = element->next;
+		element->next = NULL;
+		stack_b->tail = element;
 		ft_buf("rrb ", stack_a, stack_b);
 	}
 }
@@ -62,25 +62,25 @@ void				rrb(t_lst *stack_a, t_lst *stack_b)
 
 void				rrr(t_lst *stack_a, t_lst *stack_b)
 {
-	t_node	*elem;
+	t_node	*element;
 
 	if ((stack_a->head != NULL && stack_a->head != stack_a->tail) ||
 	(stack_b->head != NULL && stack_b->head != stack_b->tail))
 	{
-		elem = stack_a->head;
-		while (elem->next != stack_a->tail)
-			elem = elem->next;
-		elem->next->next = stack_a->head;
-		stack_a->head = elem->next;
-		elem->next = NULL;
-		stack_a->tail = elem;
-		elem = stack_b->head;
-		while (elem->next != stack_b->tail)
-			elem = elem->next;
-		elem->next->next = stack_b->head;
-		stack_b->head = elem->next;
-		elem->next = NULL;
-		stack_b->tail = elem;
+		element = stack_a->head;
+		while (element->next != stack_a->tail)
+			element = element->next;
+		element->next->next = stack_a->head;
+		stack_a->head = element->next;
+		element->next = NULL;
+		stack_a->tail = element;
+		element = stack_b->head;
+		while (element->next != stack_b->tail)
+			element = element->next;
+		element->next->next = stack_b->head;
+		stack_b->head = element->next;
+		element->next = NULL;
+		stack_b->tail = element;
 		ft_buf("rrr ", stack_a, stack_b);
 	}
 }
