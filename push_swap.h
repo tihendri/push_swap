@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 09:44:48 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/19 13:42:22 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/07/23 15:39:56 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,57 +18,77 @@
 # include <unistd.h>
 
 /*
-**Global variables
+**list structure
 */
 
-char				g_buf[4096];
-int							g_i;
-
-/*
-**Node structure
-*/
-
-typedef struct		s_node
+typedef struct		s_lst
 {
-	struct s_node	*next;
-	int				value;
-}					t_node;
+	struct s_lst	*next;
+	struct s_lst	*prev;
+	int				n;
+}					t_lst;
 
 /*
 **List structure
 */
 
-typedef struct		s_lst
+typedef struct		s_stack
 {
-	size_t			value;
-	size_t			coup;
-	struct s_node	*head;
-	struct s_node	*tail;
-}					t_lst;
+	int				start;
+	int				argc;
+	t_lst			**p;
+	t_lst			*head;
+	t_lst			*tail;
+}					t_stack;
 
 /*
-**from visual display
+**from instructions_for_moves.c file, instructions to execute in
+**commands file.
 */
 
-void				ft_error(void);
-void				ft_bufset(void);
-void				ft_printout(t_lst *stack_a, t_lst *stack_b);
-void				ft_buf(char *str, t_lst *stack_a, t_lst *stack_b);
+void				print_stacks(t_lst *a, t_lst *b, char *line);
+void				push(t_lst **from, t_lst **to, t_lst **to_tail);
+void				swap(t_lst **head);
+void				rotate(t_lst **head, t_lst **tail);
+void				rev_rotate(t_lst **head, t_lst **tail);
 
 /*
-**from moves files, instructions
+**from commands_for_moves.c file, call executable instructions from
+**instructions file.
 */
 
-void				pa(t_lst *stack_a, t_lst *stack_b);
-void				pb(t_lst *stack_a, t_lst *stack_b);
-void				ra(t_lst *stack_a, t_lst *stack_b);
-void				rb(t_lst *stack_a, t_lst *stack_b);
-void				rr(t_lst *stack_a, t_lst *stack_b);
-void				rra(t_lst *stack_a, t_lst *stack_b);
-void				rrb(t_lst *stack_a, t_lst *stack_b);
-void				rrr(t_lst *stack_a, t_lst *stack_b);
-void				sa(t_lst *stack_a, t_lst *stack_b);
-void				sb(t_lst *stack_a, t_lst *stack_b);
-void				ss(t_lst *stack_a, t_lst *stack_b);
+void				swapper(char *line, t_stack *a, t_stack *b);
+void				rotater(char *line, t_stack *a, t_stack *b);
+void				rev_rotater(char *line, t_stack *a, t_stack *b);
+
+/*
+**from midpoint.c file, gets the median/middle of the input data,
+**in order to split.
+*/
+
+int					get_count(t_stack *s);
+int					get_true_median(t_stack *a);
+
+/*
+**from stack_a_functions.c file, contains all the functions that
+**will be applied to stack a.
+*/
+
+long				special_median_a(t_stack *a);
+int					big_a(t_stack *a, char *com, int med, int *t_rewind);
+void				split_a(t_stack *a, t_stack *b, int med, char *com);
+void				three_case(t_stack *a, char *temp);
+void				sort_a(t_stack *a, int count, char *temp);
+
+/*
+**from stack_b_functions.c file, contains all the functions that
+**will be applied to stack b.
+*/
+
+long				special_median_b(t_stack *b);
+int					low_b(t_stack *b, char *com, int med, int count[2]);
+void				split_b(t_stack *a, t_stack *b, int med, char *com);
+void				three_caseb(t_stack *a, char *temp);
+void				sort_b(t_stack *b, int count, char *temp);
 
 #endif

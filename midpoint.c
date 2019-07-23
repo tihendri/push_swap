@@ -1,0 +1,59 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   midpoint.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/07/12 10:16:17 by tihendri          #+#    #+#             */
+/*   Updated: 2019/07/23 15:19:23 by tihendri         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+
+int	get_count(t_stack *s)
+{
+	int		count;
+	t_lst	*temp;
+
+	temp = s->head;
+	count = 0;
+	while (temp != s->p[s->start] && count < 12)
+	{
+		count++;
+		temp = temp->next;
+	}
+	if (!s->p[s->start] && count == 3)
+		return (-1);
+	return (count);
+}
+
+int	get_true_median(t_stack *a)
+{
+	t_lst	*temp;
+	int		arr[a->ac + 1];
+	int		i;
+	int		j[2];
+
+	temp = a->head;
+	i = 0;
+	while (temp != a->p[a->start])
+	{
+		arr[i++] = temp->n;
+		temp = temp->next;
+	}
+	j[0] = -1;
+	while (j[0]++ < i)
+	{
+		j[1] = j[0];
+		while (++j[1] < i)
+			if (arr[j[0]] < arr[j[1]])
+			{
+				arr[a->ac] = arr[j[1]];
+				arr[j[1]] = arr[j[0]];
+				arr[j[0]] = arr[a->ac];
+			}
+	}
+	return (arr[i / 2]);
+}
