@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 10:18:38 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/23 15:37:13 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/07/25 09:51:29 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 long	special_median_a(t_stack *a)
 {
-	t_pslst	*temp;
+	t_lst	*temp;
 	int		arr[12];
 	int		i;
 	int		j[2];
@@ -48,7 +48,7 @@ long	special_median_a(t_stack *a)
 int		big_a(t_stack *a, char *com, int med, int *t_rewind)
 {
 	int		skips;
-	t_pslst	*temp;
+	t_lst	*temp;
 
 	skips = 0;
 	temp = a->head;
@@ -86,7 +86,7 @@ void	split_a(t_stack *a, t_stack *b, int med, char *com)
 			push(&a->head, &b->head, &b->tail);
 			ft_strcat(com, "pb\n");
 		}
-		else if (!(deal_higher_a(a, com, med, &rewind)))
+		else if (!(big_a(a, com, med, &rewind)))
 			break ;
 	}
 	while (a->p[a->start] && --rewind >= 0)

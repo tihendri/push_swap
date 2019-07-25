@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 10:16:17 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/23 15:19:23 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/07/25 09:42:38 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	get_count(t_stack *s)
 int	get_true_median(t_stack *a)
 {
 	t_lst	*temp;
-	int		arr[a->ac + 1];
+	int		arr[a->argc + 1];
 	int		i;
 	int		j[2];
 
@@ -50,9 +50,9 @@ int	get_true_median(t_stack *a)
 		while (++j[1] < i)
 			if (arr[j[0]] < arr[j[1]])
 			{
-				arr[a->ac] = arr[j[1]];
+				arr[a->argc] = arr[j[1]];
 				arr[j[1]] = arr[j[0]];
-				arr[j[0]] = arr[a->ac];
+				arr[j[0]] = arr[a->argc];
 			}
 	}
 	return (arr[i / 2]);

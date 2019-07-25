@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 10:17:30 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/23 15:39:52 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/07/25 09:52:00 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 long	special_median_b(t_stack *b)
 {
-	t_pslst *temp;
+	t_lst	*temp;
 	int		arr[7];
 	int		i;
 	int		j[2];
@@ -48,7 +48,7 @@ long	special_median_b(t_stack *b)
 int		low_b(t_stack *b, char *com, int med, int count[2])
 {
 	int		skips;
-	t_pslst *temp;
+	t_lst	*temp;
 
 	skips = 0;
 	temp = b->head;
@@ -62,7 +62,7 @@ int		low_b(t_stack *b, char *com, int med, int count[2])
 	count[0] += skips;
 	while (skips--)
 	{
-		rotate(&b->head, &b->end);
+		rotate(&b->head, &b->tail);
 		ft_strcat(com, "rb\n");
 	}
 	return (1);
@@ -82,15 +82,15 @@ void	split_b(t_stack *a, t_stack *b, int med, char *com)
 	{
 		if (b->head->n > med)
 		{
-			push(&b->head, &a->head, &a->end);
+			push(&b->head, &a->head, &a->tail);
 			ft_strcat(com, "pa\n");
 		}
-		else if (!(deal_lower_b(b, com, med, count)))
+		else if (!(low_b(b, com, med, count)))
 			break ;
 	}
 	while (b->p[b->start] && --count[0] >= 0)
 	{
-		rev_rotate(&b->head, &b->end);
+		rev_rotate(&b->head, &b->tail);
 		ft_strcat(com, "rrb\n");
 	}
 }
@@ -103,12 +103,12 @@ void	three_caseb(t_stack *a, char *temp)
 		if (a->head->next->n < a->head->next->next->n
 		&& a->head->next->n < a->head->n)
 		{
-			rev_rotate(&a->head, &a->end);
+			rev_rotate(&a->head, &a->tail);
 			ft_strcat(temp, "rrb\n");
 		}
 		else
 		{
-			rotate(&a->head, &a->end);
+			rotate(&a->head, &a->tail);
 			ft_strcat(temp, "rb\n");
 		}
 	}
