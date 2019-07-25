@@ -6,11 +6,11 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 10:16:58 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/23 15:05:09 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/07/25 16:50:31 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 void	print_stacks(t_lst *a, t_lst *b, char *line)
 {

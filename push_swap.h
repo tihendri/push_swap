@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 09:44:48 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/23 15:39:56 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/07/25 17:19:44 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,15 @@ typedef struct		s_stack
 	t_lst			*tail;
 }					t_stack;
 
+/*
+**from the stack.c file, file that creates the stack to be sorted.
+*/
+
+int					check_doubles(t_stack *a, int ac);
+int					check_only_number(int ac, char **av);
+void				build_stack(t_stack *a, t_stack *b, char **av, int ac);
+void				error(void);
+void				lst_addtail_fast(char *str, t_lst **back);
 /*
 **from instructions_for_moves.c file, instructions to execute in
 **commands file.

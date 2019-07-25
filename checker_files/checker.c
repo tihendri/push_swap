@@ -6,11 +6,11 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 10:05:43 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/19 13:21:52 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/07/25 16:49:46 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 /*
 **This function merely displays char string input.

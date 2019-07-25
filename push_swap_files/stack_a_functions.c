@@ -6,11 +6,11 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 10:18:38 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/25 09:51:29 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/07/25 17:14:47 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../push_swap.h"
 
 long	special_median_a(t_stack *a)
 {
