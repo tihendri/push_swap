@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/20 13:26:58 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/15 16:12:23 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/07/25 13:01:42 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int					ft_strnequ(char const *s1, char const *s2, size_t n);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
 int					ft_wordcount(char const *s, char c);
+long				ft_atol(const char *s);
 size_t				ft_strlcat(char *dst, const char *src, size_t dstsize);
 size_t				ft_strlen(const char *s);
 void				ft_bzero(void *s, size_t n);
