@@ -6,70 +6,70 @@
 #    By: tihendri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/15 16:20:46 by tihendri          #+#    #+#              #
-#    Updated: 2019/07/26 13:50:52 by tihendri         ###   ########.fr        #
+#    Updated: 2019/08/12 16:34:22 by tihendri         ###   ########.fr        #
 #                                                                              #
 #                                                                              #
 # **************************************************************************** #
 
-INCLUDES = -Ilibft/Includes -I.
+NAME_PS	= push_swap
+NAME_CH	= checker
 
-LIB = libft
+PS_SRC	= algo_solve.c commands_for_moves.c instructions.c \
+		  main.c midpoint.c stack.c stack_a_functions.c stack_b_functions.c
 
-LIB.A = libft.a
+CH_SRC	= algo_solve.c commands_for_moves.c instructions.c \
+		  checker_main.c midpoint.c stack.c stack_a_functions.c \
+		  stack_b_functions.c
 
-SRC_NAME =		all_source/instructions_for_moves.c \
-				all_source/midpoint.c \
-				all_source/stack.c \
-				all_source/stack_a_functions.c \
-				all_source/stack_b_functions.c \
-				all_source/checker_main.c \
-				all_sources/commands_for_moves.c
+CFLAGS	= -Wall -Wextra -Werror
 
+OBJ		= object_files
 
-CH_OBJ_NAME = $(CH_SRC_NAME:.c=.o)
+OBJPS	= $(addprefix $(OBJ)/,$(PS_SRC:.c=.o))
+OBJCH	= $(addprefix $(OBJ)/,$(CH_SRC:.c=.o))
 
-P_OBJ_NAME =  $(P_SRC_NAME:.c=.o)
+.PHONY: all clean fclean re
 
-CH_SRC = $(CH_SRC_NAME)
+RED		=	\033[0;31m
+GREEN	=	\033[0;32m
+NC		=	\033[0m
 
-P_SRC =  $(P_SRC_NAME)
+HDR 		= -I./includes
+LIBFT_HDR 	= -I./libft/includes
+LIB_BINARY	= -L./libft -lft
+LIBFT		= libft/libft.a
 
-CH_OBJ = $(CH_OBJ_NAME)
+$(LIBFT):
+	@make -C libft re
 
-P_OBJ = $(P_OBJ_NAME)
+all: $(LIBFT) $(NAME_PS) $(NAME_CH)
 
-ALL_OBJ = $(P_OBJ) $(CH_OBJ)
+$(OBJ):
+	@mkdir $@
 
-NAME_C = checker
+$(OBJ)/%.o: %.c | $(OBJ)
+	@$(CC) $(CFLAGS) $(HDR) $(LIBFT_HDR) -c $< -o $@
 
-NAME_P = push_swap
+$(NAME_PS): $(OBJPS) $(LIBFT)
+	@echo "$(GREEN)compiling $@...$(NC)"
+	@gcc $(CFLAGS) $(OBJPS) $(LIB_BINARY) -o $@
+	@echo "$(GREEN)$@ compilation successful :)$(NC)"
 
-FLAGS = -Wall -Wextra -Werror
+$(NAME_CH): $(OBJCH) $(LIBFT)
+	@echo "$(GREEN)compiling $@...$(NC)"
+	@gcc $(CFLAGS) $(OBJCH) $(LIB_BINARY) -o $@
+	@echo "$(GREEN)$@ compilation successful :)$(NC)"
 
-all : library $(NAME_C) $(NAME_P)
+clean:
+	@echo "$(RED)deleting object files...$(NC)"
+	@/bin/rm -f $(OBJPS) $(OBJCH)
+	@rm -rf $(OBJ)
+	@make -C ./libft clean
 
-library :
-	make -C $(LIB)
+fclean: clean
+	@echo "$(RED)deleting both executables...$(NC)"
+	@/bin/rm -f $(NAME_PS)
+	@/bin/rm -f $(NAME_CH)
+	@make -C ./libft fclean
 
-$(NAME_C) : $(CH_OBJ)
-	gcc -o $@ $(CH_OBJ) $(INCLUDES) $(LIB)/$(LIB.A) -g
-
-$(NAME_P) : $(P_OBJ)
-	gcc -o $@ $(P_OBJ) $(INCLUDES) $(LIB)/$(LIB.A) -g
-
-$(OBJ_PATH)/%.o : $(SRC_PATH)/%.c
-	@mkdir -p $(OBJ_PATH)
-	@mkdir -p $(dir $(P_OBJ))
-	@mkdir -p $(dir $(CH_OBJ))
-	gcc -o $@ -c $< $(INCLUDES) $(FLAGS) -g
-
-clean :
-	rm -fr $(ALL_OBJ)
-	make clean -C $(LIB)
-
-fclean : clean
-	rm -f $(NAME_C)
-	rm -f $(NAME_P)
-	make fclean -C $(LIB)
-
-re : fclean all
+re: fclean all

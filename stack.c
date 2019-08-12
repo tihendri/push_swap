@@ -6,11 +6,11 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 11:57:48 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/25 17:14:27 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/08/12 16:25:02 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
 /*
 **displays error and terminates the rest of the code.
@@ -18,7 +18,7 @@
 
 void	error(void)
 {
-	ft_putstr("error\n");
+	ft_putstr("Error\n");
 	exit(1);
 }
 

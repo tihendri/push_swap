@@ -6,11 +6,11 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 09:47:51 by tihendri          #+#    #+#             */
-/*   Updated: 2019/08/12 12:09:24 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/08/12 16:22:40 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
 int		split_stack_a(t_stack *a, t_stack *b, t_list **command)
 {

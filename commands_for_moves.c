@@ -6,11 +6,11 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 16:14:13 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/26 11:56:57 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/08/12 16:23:11 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
 /*
 **Checker checks the input from user and runs the input commands until it

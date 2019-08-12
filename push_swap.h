@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 09:44:48 by tihendri          #+#    #+#             */
-/*   Updated: 2019/08/12 10:47:28 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/08/12 16:25:58 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,16 @@ int					low_b(t_stack *b, char *com, int med, int count[2]);
 void				split_b(t_stack *a, t_stack *b, int med, char *com);
 void				three_caseb(t_stack *a, char *temp);
 void				sort_b(t_stack *b, int count, char *temp);
+
+/*
+**from algo_solve.c file, contains the functions used to sort the
+**arrays.
+*/
+
+int					split_stack_a(t_stack *a, t_stack *b, t_list **command);
+int					sorted(t_stack *a);
+void				push_b(t_stack *b, t_stack *a, int count, char *temp);
+void				b_to_a(t_stack *a, t_stack *b, t_list **command);
+t_list				*solver(t_stack *a, t_stack *b);
 
 #endif

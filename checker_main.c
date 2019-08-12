@@ -6,11 +6,11 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 10:05:43 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/26 13:43:30 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/08/12 16:23:00 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
 /*
 **This function puts the the message ok or ko.

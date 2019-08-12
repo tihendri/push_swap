@@ -6,11 +6,11 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 10:16:17 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/25 16:50:43 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/08/12 16:24:49 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../push_swap.h"
+#include "push_swap.h"
 
 int	get_count(t_stack *s)
 {

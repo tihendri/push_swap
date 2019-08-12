@@ -6,7 +6,7 @@
 #    By: tihendri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/05 14:09:03 by tihendri          #+#    #+#              #
-#    Updated: 2019/08/12 12:06:32 by tihendri         ###   ########.fr        #
+#    Updated: 2019/08/12 16:45:51 by tihendri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,11 @@ BONUS	= ft_lstadd.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
 		  ft_lstiter.c ft_lstmap.c ft_lstnew_str.c ft_lstaddend.c
 
 EXTRA	= ft_wordcount.c ft_strndup.c ft_realloc.c ft_count_letters.c \
-		  ft_iswhitespace.c get_next_line.c
+		  ft_iswhitespace.c get_next_line.c ft_atol.c
+
+RED			=	\033[0;31m
+GREEN		=	\033[0;32m
+NC			=	\033[0m
 
 FILES 	= $(PART1) $(PART2) $(BONUS) $(EXTRA)
 
@@ -50,15 +54,19 @@ OBJ 	= $(FILES:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJ)
+	@echo "$(GREEN)Compiling libft library...$(NC)"
 	$(AR) rcs $(NAME) $(OBJ)
+	@echo "$(GREEN)Static library libft.a was created$(NC)"
 # here we are creating/modifying an archive by calling $(AR)
 # rcs: Replace, Create, Sort
 # https://www.mkssoftware.com/docs/man1/ar.1.asp
 
 clean:
+	@echo "$(RED)Deleting libft object files...$(NC)"
 	@/bin/rm -rf $(OBJ)
 
 fclean: clean
+	@echo "$(RED)Deleting libft static library...$(NC)"
 	@/bin/rm -f $(NAME)
 
 re: fclean all
