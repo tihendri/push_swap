@@ -6,12 +6,13 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 09:44:48 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/25 17:19:44 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/08/12 10:47:28 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
+# define NO_MEDIAN 2147483648
 
 # include "libft/libft.h"
 # include <stdlib.h>
@@ -42,6 +43,13 @@ typedef struct		s_stack
 }					t_stack;
 
 /*
+**from checker_main.c file.
+*/
+
+int					check_stack(t_stack *a);
+void				display_finish(t_stack *a, t_stack *b, int ok);
+
+/*
 **from the stack.c file, file that creates the stack to be sorted.
 */
 
@@ -50,6 +58,7 @@ int					check_only_number(int ac, char **av);
 void				build_stack(t_stack *a, t_stack *b, char **av, int ac);
 void				error(void);
 void				lst_addtail_fast(char *str, t_lst **back);
+
 /*
 **from instructions_for_moves.c file, instructions to execute in
 **commands file.

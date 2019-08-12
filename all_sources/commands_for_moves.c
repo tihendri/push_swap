@@ -6,11 +6,18 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 16:14:13 by tihendri          #+#    #+#             */
-/*   Updated: 2019/07/25 16:50:23 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/07/26 11:56:57 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
+
+/*
+**Checker checks the input from user and runs the input commands until it
+**encounters an error or it's done.
+**This function acts as the implementation of the swapping function.
+**Swap first two elements of respective stacks.
+*/
 
 void	swapper(char *line, t_stack *a, t_stack *b)
 {
@@ -28,6 +35,12 @@ void	swapper(char *line, t_stack *a, t_stack *b)
 	swap(&b->head);
 }
 
+/*
+**This function acts as the implementation of the rotating function.
+**Shifts up all elements of respective stacks by one and the first element
+**becomes the last.
+*/
+
 void	rotater(char *line, t_stack *a, t_stack *b)
 {
 	if (!ft_strcmp(line, "ra"))
@@ -43,6 +56,12 @@ void	rotater(char *line, t_stack *a, t_stack *b)
 	rotate(&a->head, &a->tail);
 	rotate(&b->head, &b->tail);
 }
+
+/*
+**This function acts as the implementation of the reverse rotating function.
+**Shifts up all elements of respective stacks by one and the last element
+**becomes the first.
+*/
 
 void	rev_rotater(char *line, t_stack *a, t_stack *b)
 {

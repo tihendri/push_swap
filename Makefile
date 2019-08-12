@@ -6,7 +6,7 @@
 #    By: tihendri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/15 16:20:46 by tihendri          #+#    #+#              #
-#    Updated: 2019/07/25 17:27:32 by tihendri         ###   ########.fr        #
+#    Updated: 2019/07/26 13:50:52 by tihendri         ###   ########.fr        #
 #                                                                              #
 #                                                                              #
 # **************************************************************************** #
@@ -17,16 +17,14 @@ LIB = libft
 
 LIB.A = libft.a
 
-CH_SRC_NAME = checker/main.c checker/run_input_cmnds.c
+SRC_NAME =		all_source/instructions_for_moves.c \
+				all_source/midpoint.c \
+				all_source/stack.c \
+				all_source/stack_a_functions.c \
+				all_source/stack_b_functions.c \
+				all_source/checker_main.c \
+				all_sources/commands_for_moves.c
 
-CH_SRC_NAME = checker_files/checker.c
-
-P_SRC_NAME = push_swap_files/commands_for_moves.c \
-			  push_swap_files/instructions_for_moves.c \
-			  push_swap_files/midpoint.c \
-			  push_swap_files/stack.c \
-			  push_swap_files/stack_a_functions.c \
-			  push_swap_files/stack_b_functions.c
 
 CH_OBJ_NAME = $(CH_SRC_NAME:.c=.o)
 

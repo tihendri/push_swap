@@ -6,7 +6,7 @@
 #    By: tihendri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/05 14:09:03 by tihendri          #+#    #+#              #
-#    Updated: 2019/07/15 16:18:54 by tihendri         ###   ########.fr        #
+#    Updated: 2019/08/12 12:06:32 by tihendri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,10 +33,10 @@ PART2	= ft_memalloc.c ft_memdel.c ft_strnew.c ft_strdel.c ft_strclr.c \
 		ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
 
 BONUS	= ft_lstadd.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
-		  ft_lstiter.c ft_lstmap.c
+		  ft_lstiter.c ft_lstmap.c ft_lstnew_str.c ft_lstaddend.c
 
 EXTRA	= ft_wordcount.c ft_strndup.c ft_realloc.c ft_count_letters.c \
-		  ft_iswhitespace.c
+		  ft_iswhitespace.c get_next_line.c
 
 FILES 	= $(PART1) $(PART2) $(BONUS) $(EXTRA)
 
