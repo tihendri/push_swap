@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/25 11:57:48 by tihendri          #+#    #+#             */
-/*   Updated: 2019/08/12 16:25:02 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/08/16 11:35:58 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ int		check_doubles(t_stack *a, int ac)
 /*
 **Checks if the input is big/small enough to be stored as an int,
 **whether the t_lst exists and then adds the list.
-**Create a swap variable (temp) in order to creat space to allocate
+**Create a swap variable (temp) in order to create space to allocate
 **new values to list.
 */
 
