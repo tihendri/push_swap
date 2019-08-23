@@ -6,7 +6,7 @@
 #    By: tihendri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/05 14:09:03 by tihendri          #+#    #+#              #
-#    Updated: 2019/08/12 16:45:51 by tihendri         ###   ########.fr        #
+#    Updated: 2019/08/23 00:18:50 by tihendri         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	@echo "$(GREEN)Compiling libft library...$(NC)"
-	$(AR) rcs $(NAME) $(OBJ)
+	@$(AR) rcs $(NAME) $(OBJ)
 	@echo "$(GREEN)Static library libft.a was created$(NC)"
 # here we are creating/modifying an archive by calling $(AR)
 # rcs: Replace, Create, Sort
@@ -72,4 +72,4 @@ fclean: clean
 re: fclean all
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@

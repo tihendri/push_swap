@@ -6,68 +6,49 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/15 10:05:43 by tihendri          #+#    #+#             */
-/*   Updated: 2019/08/12 16:23:00 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/08/23 10:48:41 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
-/*
-**This function puts the the message ok or ko.
-**if int ok is 0 (false), display KO.
-**if int ok is 1 (true), display OK.
-**exit with successful/unsuccessful termination of program.
-*/
-
-void	display_finish(t_stack *a, t_stack *b, int ok)
+void	print_exit(t_stack *a, t_stack *b, int ok)
 {
-	t_lst	*temp;
+	t_lst	*tmp;
 
 	while (a->head)
 	{
-		temp = a->head;
+		tmp = a->head;
 		a->head = a->head->next;
-		free(temp);
+		free(tmp);
 	}
 	while (b->head)
 	{
-		temp = b->head;
+		tmp = b->head;
 		b->head = b->head->next;
-		free(temp);
+		free(tmp);
 	}
 	if (ok)
-	{
 		ft_putstr("OK\n");
-		exit(0);
-	}
-	if (!ok)
-	{
+	else if (!ok)
 		ft_putstr("KO\n");
-		exit(1);
-	}
+	exit(1);
 }
 
-/*
-**This function checks the stack is sorted.
-*/
-
-int		check_stack(t_stack *stack)
+int		check_a(t_stack *a)
 {
-	t_lst	*temp;
+	t_lst	*tmp;
 
-	temp = stack->head;
-	while (temp->next != NULL)
+	tmp = a->head;
+	while (tmp->next != NULL)
 	{
-		if (temp->next->n < temp->n)
+		if (tmp->next->n < tmp->n)
 			return (0);
-		temp = temp->next;
+		tmp = tmp->next;
 	}
 	return (1);
 }
-
-/*
-**This is the main function of checker.
-*/
 
 int		main(int ac, char **av)
 {
@@ -75,6 +56,8 @@ int		main(int ac, char **av)
 	t_stack	b;
 	char	*l;
 
+	if (ac < 2)
+		return (0);
 	build_stack(&a, &b, av, ac);
 	while (get_next_line(0, &l) > 0)
 	{
@@ -89,10 +72,10 @@ int		main(int ac, char **av)
 		else if (!ft_strcmp(l, "rra") || !ft_strcmp(l, "rrb") || !ft_strcmp(l, "rrr"))
 			rev_rotater(l, &a, &b);
 		else
-			display_finish(&a, &b, 0);
+			print_exit(&a, &b, 0);
 		free(l);
 	}
-	if (!check_stack(&a) || b.head)
-		display_finish(&a, &b, 0);
-	display_finish(&a, &b, 1);
+	if (!check_a(&a) || b.head)
+		print_exit(&a, &b, 0);
+	print_exit(&a, &b, 1);
 }

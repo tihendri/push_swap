@@ -6,7 +6,7 @@
 #    By: tihendri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/15 16:20:46 by tihendri          #+#    #+#              #
-#    Updated: 2019/08/16 13:36:02 by tihendri         ###   ########.fr        #
+#    Updated: 2019/08/23 06:16:41 by tihendri         ###   ########.fr        #
 #                                                                              #
 #                                                                              #
 # **************************************************************************** #
@@ -17,7 +17,7 @@ NAME_CH	= checker
 PS_SRC	= algo_solve.c commands_for_moves.c instructions.c \
 		  main.c midpoint.c stack.c stack_a_functions.c stack_b_functions.c
 
-#CH_SRC	= algo_solve.c commands_for_moves.c instructions.c \
+CH_SRC	= algo_solve.c commands_for_moves.c instructions.c \
 		  checker_main.c midpoint.c stack.c stack_a_functions.c \
 		  stack_b_functions.c
 
@@ -42,7 +42,8 @@ LIBFT		= libft/libft.a
 $(LIBFT):
 	@make -C libft re
 
-all: $(LIBFT) $(NAME_PS) $(NAME_CH)
+all: $(LIBFT) $(NAME_CH)
+#$(NAME_PS) 
 
 $(OBJ):
 	@mkdir $@
@@ -55,10 +56,10 @@ $(NAME_PS): $(OBJPS) $(LIBFT)
 	@gcc $(CFLAGS) $(OBJPS) $(LIB_BINARY) -o $@
 	@echo "$(GREEN)$@ compilation successful :)$(NC)"
 
-#$(NAME_CH): $(OBJCH) $(LIBFT)
-#	@echo "$(GREEN)compiling $@...$(NC)"
-#	@gcc $(CFLAGS) $(OBJCH) $(LIB_BINARY) -o $@
-#	@echo "$(GREEN)$@ compilation successful :)$(NC)"
+$(NAME_CH): $(OBJCH) $(LIBFT)
+	@echo "$(GREEN)compiling $@...$(NC)"
+	@gcc $(CFLAGS) $(OBJCH) $(LIB_BINARY) -o $@
+	@echo "$(GREEN)$@ compilation successful :)$(NC)"
 
 test: all
 	@perl ops.pl
@@ -73,7 +74,7 @@ clean:
 fclean: clean
 	@echo "$(RED)deleting both executables...$(NC)"
 	@/bin/rm -f $(NAME_PS)
-#	@/bin/rm -f $(NAME_CH)
+	@/bin/rm -f $(NAME_CH)
 	@make -C ./libft fclean
 
 re: fclean all
