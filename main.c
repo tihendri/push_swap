@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/12 09:48:06 by tihendri          #+#    #+#             */
-/*   Updated: 2019/08/12 16:24:37 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/09/12 23:42:35 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,6 @@ int		main(int ac, char **av)
 	}
 	free(b.p);
 	free_all(&a, command);
+	while (1);
+	return (0);
 }

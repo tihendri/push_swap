@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/12 10:16:17 by tihendri          #+#    #+#             */
-/*   Updated: 2019/08/12 16:24:49 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/09/12 20:50:15 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ int	get_count(t_stack *s)
 		return (-1);
 	return (count);
 }
+
+/*
+**Finds wherever i is and splits the total in half.
+*/
 
 int	get_true_median(t_stack *a)
 {

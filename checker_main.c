@@ -5,94 +5,83 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/15 10:05:43 by tihendri          #+#    #+#             */
-/*   Updated: 2019/08/12 16:23:00 by tihendri         ###   ########.fr       */
+/*   Created: 2019/08/20 11:53:04 by tihendri          #+#    #+#             */
+/*   Updated: 2019/09/12 23:06:08 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
+#include <limits.h>
 
 /*
-**This function puts the the message ok or ko.
-**if int ok is 0 (false), display KO.
-**if int ok is 1 (true), display OK.
-**exit with successful/unsuccessful termination of program.
+**void	print_stacks(t_all *all)
+**{
+**	fprintf(stderr, "\e[34mSize A = %d ", all->size_a);
+**	fprintf(stderr, "\e[31mSTACK A = ");
+**	for(int i = 0; i < all->size_a; i++)
+**		fprintf(stderr, "%d ", all->int_stack_a[i]);
+**	fprintf(stderr, "\e[0m\n");
+**	fprintf(stderr, "\e[34mSize B = %d ", all->size_b);
+**	fprintf(stderr, "\e[32mSTACK B = ");
+**	for(int i = 0; i < all->size_b; i++)
+**		fprintf(stderr, "%d ", all->int_stack_b[i]);
+**	fprintf(stderr, "\e[0m\n");
+**}
 */
 
-void	display_finish(t_stack *a, t_stack *b, int ok)
+void		put_ok_ko(t_all *all)
 {
-	t_lst	*temp;
-
-	while (a->head)
-	{
-		temp = a->head;
-		a->head = a->head->next;
-		free(temp);
-	}
-	while (b->head)
-	{
-		temp = b->head;
-		b->head = b->head->next;
-		free(temp);
-	}
-	if (ok)
-	{
-		ft_putstr("OK\n");
-		exit(0);
-	}
-	if (!ok)
-	{
-		ft_putstr("KO\n");
-		exit(1);
-	}
+	if (check_ascii(all))
+		ft_putstr_fd("\e[32mOK\n\e[0m", 2);
+	else
+		ft_putstr_fd("\e[31mko\n\e[0m", 2);
 }
 
-/*
-**This function checks the stack is sorted.
-*/
-
-int		check_stack(t_stack *stack)
+char		**join_arguments(char **av)
 {
-	t_lst	*temp;
+	int		i;
+	char	**array;
+	char	**split;
 
-	temp = stack->head;
-	while (temp->next != NULL)
+	i = -1;
+	array = (char **)malloc(sizeof(char *));
+	*array = NULL;
+	while (av[++i] != NULL)
 	{
-		if (temp->next->n < temp->n)
-			return (0);
-		temp = temp->next;
+		if (!ft_strcmp(av[i], "-v") || !ft_strcmp(av[i], "-c") ||
+		!ft_strcmp(av[i], "-d"))
+			continue ;
+		split = ft_strsplit(av[i], ' ');
+		array = ft_array_join(array, split);
 	}
-	return (1);
+	return (array);
 }
 
-/*
-**This is the main function of checker.
-*/
-
-int		main(int ac, char **av)
+int			main(int ac, char **av)
 {
-	t_stack	a;
-	t_stack	b;
-	char	*l;
+	t_all	*initialize_struct();
+	void	fill_stack(t_all *all);
+	t_all	*all;
 
-	build_stack(&a, &b, av, ac);
-	while (get_next_line(0, &l) > 0)
+	(void)ac;
+	all = initialize_struct();
+	all->args = join_arguments(av + 1);
+	error_check(all);
+	all->size = ft_array_size(all->args);
+	all->size_a = all->size;
+	fill_stack(all);
+//	print_stacks(all);
+	check_duplicates(all);
+	if (check_ascii(all))
+		return (0);
+	while (get_next_line(0, &all->line) > 0)
 	{
-		if (!ft_strcmp(l, "sa") || !ft_strcmp(l, "sb") || !ft_strcmp(l, "ss"))
-			swapper(l, &a, &b);
-		else if (!ft_strcmp(l, "pa"))
-			push(&b.head, &a.head, &a.tail);
-		else if (!ft_strcmp(l, "pb"))
-			push(&a.head, &b.head, &b.tail);
-		else if (!ft_strcmp(l, "ra") || !ft_strcmp(l, "rb") || !ft_strcmp(l, "rr"))
-			rotater(l, &a, &b);
-		else if (!ft_strcmp(l, "rra") || !ft_strcmp(l, "rrb") || !ft_strcmp(l, "rrr"))
-			rev_rotater(l, &a, &b);
-		else
-			display_finish(&a, &b, 0);
-		free(l);
+		check_moves(all, all->line);
+//		print_stacks(all);
+		if (all->line)
+			ft_strdel(&all->line);
 	}
-	if (!check_stack(&a) || b.head)
-		display_finish(&a, &b, 0);
-	display_finish(&a, &b, 1);
+	put_ok_ko(all);
+	free_all(all);
+	return (0);
 }
