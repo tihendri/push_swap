@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 11:53:36 by tihendri          #+#    #+#             */
-/*   Updated: 2019/09/13 06:43:57 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/09/13 07:37:55 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include "libft/libft.h"
 # include <stdlib.h>
+#include <stdio.h>
 
 typedef struct		s_all
 {
@@ -87,6 +88,8 @@ void				put_ok_ko(t_all *all);
 
 void				fill_stack(t_all *all);
 t_all				*initialize_struct(void);
+
+int					ft_int_too_big(int n);
 
 void				print_stacks(t_all *all);
 #endif

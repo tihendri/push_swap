@@ -6,7 +6,7 @@
 #    By: tihendri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/15 16:20:46 by tihendri          #+#    #+#              #
-#    Updated: 2019/09/13 06:47:55 by tihendri         ###   ########.fr        #
+#    Updated: 2019/09/13 07:38:17 by tihendri         ###   ########.fr        #
 #    Updated: 2019/08/23 06:16:41 by tihendri         ###   ########.fr        #
 #                                                                              #
 #                                                                              #
@@ -26,7 +26,7 @@ CH_SRC	= check_ascii.c check_digits.c \
 		  ft_array_size.c initialize_struct.c \
 		  push_moves.c reverse_rotate_moves.c \
 		  rotate_moves.c swap.c \
-		  swap_moves.c
+		  swap_moves.c ft_int_too_big.c
 
 CFLAGS	= -Wall -Wextra -Werror
 
