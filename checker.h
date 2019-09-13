@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 11:53:36 by tihendri          #+#    #+#             */
-/*   Updated: 2019/09/12 23:03:29 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/09/13 06:43:57 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "libft/libft.h"
 # include <stdlib.h>
-# include <stdio.h>
 
 typedef struct		s_all
 {
