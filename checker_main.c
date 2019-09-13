@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 11:53:04 by tihendri          #+#    #+#             */
-/*   Updated: 2019/09/13 07:30:25 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/09/13 11:04:12 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,13 @@ void	print_stacks(t_all *all)
 	fprintf(stderr, "\e[0m\n");
 }
 
-
+/*
+**<<<<<<<<<<<<<<<<<<<<<<<<<<<<ATTENTION>>>>>>>>>>>>>>>>>>>>>>>>>>
+**Fix condition to check if stack_b is clear before displaying ok
+*/
 void		put_ok_ko(t_all *all)
 {
-	if (check_ascii(all) && !(all->int_stack_b))
+	if (check_ascii(all) || !(all->int_stack_b))
 		ft_putstr_fd("\e[32mOK\n\e[0m", 2);
 	else
 		ft_putstr_fd("\e[31mKO\n\e[0m", 2);
