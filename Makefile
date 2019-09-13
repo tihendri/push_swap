@@ -6,7 +6,11 @@
 #    By: tihendri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/15 16:20:46 by tihendri          #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2019/09/12 20:39:53 by tihendri         ###   ########.fr        #
+=======
+#    Updated: 2019/08/23 06:16:41 by tihendri         ###   ########.fr        #
+>>>>>>> a099a990ac43296f367492dcbd82c0da50b25c86
 #                                                                              #
 #                                                                              #
 # **************************************************************************** #
@@ -17,6 +21,7 @@ NAME_CH	= checker
 PS_SRC	= algo_solve.c commands_for_moves.c instructions.c \
 		  main.c midpoint.c stack.c stack_a_functions.c stack_b_functions.c
 
+<<<<<<< HEAD
 CH_SRC	= check_ascii.c check_digits.c \
 		  check_duplicates.c check_moves.c \
 		  checker_main.c error_check.c \
@@ -26,6 +31,11 @@ CH_SRC	= check_ascii.c check_digits.c \
 		  push_moves.c reverse_rotate_moves.c \
 		  rotate_moves.c swap.c \
 		  swap_moves.c
+=======
+CH_SRC	= algo_solve.c commands_for_moves.c instructions.c \
+		  checker_main.c midpoint.c stack.c stack_a_functions.c \
+		  stack_b_functions.c
+>>>>>>> a099a990ac43296f367492dcbd82c0da50b25c86
 
 CFLAGS	= -Wall -Wextra -Werror
 
@@ -48,7 +58,8 @@ LIBFT		= libft/libft.a
 $(LIBFT):
 	@make -C libft re
 
-all: $(LIBFT) $(NAME_PS) $(NAME_CH)
+all: $(LIBFT) $(NAME_CH)
+#$(NAME_PS) 
 
 $(OBJ):
 	@mkdir $@
