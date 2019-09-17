@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 11:53:04 by tihendri          #+#    #+#             */
-/*   Updated: 2019/09/13 11:04:12 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/09/17 16:03:44 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	print_stacks(t_all *all)
 */
 void		put_ok_ko(t_all *all)
 {
-	if (check_ascii(all) || !(all->int_stack_b))
+	if (check_sort(all) || !(all->int_stack_b))
 		ft_putstr_fd("\e[32mOK\n\e[0m", 2);
 	else
 		ft_putstr_fd("\e[31mKO\n\e[0m", 2);
@@ -75,7 +75,7 @@ int		main(int ac, char **av)
 	fill_stack(all);
 	print_stacks(all);
 	check_duplicates(all);
-	if (check_ascii(all))
+	if (check_sort(all))
 		return (0);
 	while (get_next_line(0, &all->line) > 0)
 	{

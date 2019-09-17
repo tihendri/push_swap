@@ -6,7 +6,7 @@
 #    By: tihendri <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/07/15 16:20:46 by tihendri          #+#    #+#              #
-#    Updated: 2019/09/13 07:38:17 by tihendri         ###   ########.fr        #
+#    Updated: 2019/09/17 16:01:14 by tihendri         ###   ########.fr        #
 #    Updated: 2019/08/23 06:16:41 by tihendri         ###   ########.fr        #
 #                                                                              #
 #                                                                              #
@@ -18,7 +18,7 @@ NAME_CH	= checker
 PS_SRC	= algo_solve.c commands_for_moves.c instructions.c \
 		  main.c midpoint.c stack.c stack_a_functions.c stack_b_functions.c
 
-CH_SRC	= check_ascii.c check_digits.c \
+CH_SRC	= check_sort.c check_digits.c \
 		  check_duplicates.c check_moves.c \
 		  checker_main.c error_check.c \
 		  fill_stack.c free_all.c \
