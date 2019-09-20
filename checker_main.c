@@ -6,13 +6,16 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 11:53:04 by tihendri          #+#    #+#             */
-/*   Updated: 2019/09/17 16:03:44 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/09/20 01:39:09 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 #include <limits.h>
 
+/*
+**Remove this function before submitting
+*/
 
 void	print_stacks(t_all *all)
 {
@@ -28,13 +31,9 @@ void	print_stacks(t_all *all)
 	fprintf(stderr, "\e[0m\n");
 }
 
-/*
-**<<<<<<<<<<<<<<<<<<<<<<<<<<<<ATTENTION>>>>>>>>>>>>>>>>>>>>>>>>>>
-**Fix condition to check if stack_b is clear before displaying ok
-*/
 void		put_ok_ko(t_all *all)
 {
-	if (check_sort(all) || !(all->int_stack_b))
+	if (check_sorted(all) && (all->size_b == 0))
 		ft_putstr_fd("\e[32mOK\n\e[0m", 2);
 	else
 		ft_putstr_fd("\e[31mKO\n\e[0m", 2);
@@ -73,14 +72,14 @@ int		main(int ac, char **av)
 	all->size = ft_array_size(all->args);
 	all->size_a = all->size;
 	fill_stack(all);
-	print_stacks(all);
+	print_stacks(all);		//remove
 	check_duplicates(all);
-	if (check_sort(all))
+	if (check_sorted(all))
 		return (0);
 	while (get_next_line(0, &all->line) > 0)
 	{
 		check_moves(all, all->line);
-		print_stacks(all);
+		print_stacks(all);		//remove
 		if (all->line)
 			ft_strdel(&all->line);
 	}

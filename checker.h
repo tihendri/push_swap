@@ -6,7 +6,7 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/20 11:53:36 by tihendri          #+#    #+#             */
-/*   Updated: 2019/09/17 16:02:50 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/09/19 23:32:58 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft/libft.h"
 # include <stdlib.h>
-#include <stdio.h>
+# include <stdio.h>
 
 typedef struct		s_all
 {
@@ -44,7 +44,7 @@ typedef struct		s_all
 	int			high;
 }					t_all;
 
-int					check_sort(t_all *all);
+int					check_sorted(t_all *all);
 
 int					check_int(int *array, int c, int n);
 void				check_duplicates(t_all *all);
