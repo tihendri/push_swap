@@ -33,7 +33,10 @@ int		check_only_number(int ac, char **av)
 	int i;
 	int	j;
 
-	i = 1;
+	if (ac == 2)
+		i = 0;
+	else
+		i = 1;
 	while (i < ac)
 	{
 		j = 0;
@@ -96,7 +99,10 @@ void	lst_addtail_fast(char *str, t_lst **back)
 
 	num = ft_atol(str);
 	if (num > 2147483647 || num < -2147483648)
+	{
+		ft_putstr("Space_13");
 		error();
+	}
 	if (*back == NULL)
 		return ;
 	temp = malloc(sizeof(t_lst));
@@ -118,7 +124,9 @@ void	build_stack(t_stack *a, t_stack *b, char **av, int ac)
 
 	i = 1;
 	if (!check_only_number(ac, av) || !(a->head = malloc(sizeof(t_lst))))
-		error();
+{		error();
+		ft_putstr("Space_1");
+}
 	a->head->n = ft_atoi(av[i++]);
 	a->head->prev = NULL;
 	a->tail = a->head;
@@ -133,6 +141,37 @@ void	build_stack(t_stack *a, t_stack *b, char **av, int ac)
 			free(temp);
 		}
 		error();
+		ft_putstr("Space_2");
+	}
+	b->head = NULL;
+	b->tail = NULL;
+}
+
+void	build_stack_2(t_stack *a, t_stack *b, char **av, int ac)
+{
+	int		i;
+	t_lst	*temp;
+
+	i = 0;
+	if (!check_only_number(ac, av) || !(a->head = malloc(sizeof(t_lst))))
+	{	error();
+	ft_putstr("Space_1");
+	}
+	a->head->n = ft_atoi(av[i++]);
+	a->head->prev = NULL;
+	a->tail = a->head;
+	while (i < ac)
+		lst_addtail_fast(av[i++], &a->tail);
+	if (!check_doubles(a, ac))
+	{
+		while (a->head)
+		{
+			temp = a->head;
+			a->head = a->head->next;
+			free(temp);
+		}
+		error();
+		ft_putstr("Space_1");
 	}
 	b->head = NULL;
 	b->tail = NULL;

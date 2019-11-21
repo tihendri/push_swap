@@ -16,7 +16,8 @@ NAME_PS	= push_swap
 NAME_CH	= checker
 
 PS_SRC	= algo_solve.c commands_for_moves.c instructions.c \
-		  main.c midpoint.c stack.c stack_a_functions.c stack_b_functions.c
+		  main.c midpoint.c stack.c stack_a_functions.c stack_b_functions.c \
+		  choose_stack.c
 
 CH_SRC	= check_sorted.c check_digits.c \
 		  check_duplicates.c check_moves.c \
@@ -59,7 +60,7 @@ $(OBJ)/%.o: %.c | $(OBJ)
 
 $(NAME_PS): $(OBJPS) $(LIBFT)
 	@echo "$(GREEN)compiling $@...$(NC)"
-	@gcc $(CFLAGS) $(OBJPS) $(LIB_BINARY) -o $@
+	@gcc -g $(CFLAGS) $(OBJPS) $(LIB_BINARY) -o $@
 	@echo "$(GREEN)$@ compilation successful :)$(NC)"
 
 $(NAME_CH): $(OBJCH) $(LIBFT)

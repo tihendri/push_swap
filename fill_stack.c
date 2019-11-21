@@ -18,7 +18,7 @@ void	fill_stack(t_all *all)
 
 	i = 0;
 	all->int_stack_a = (int *)malloc(sizeof(int ) * all->size);
-	all->int_stack_b = (int *)malloc(sizeof(int ) * all->size);
+	all->int_stack_b = (int *)malloc(sizeof(int ) * all->size + 1);
 	while (i < all->size)
 	{
 		all->int_stack_a[i] = ft_atoi(all->args[i]);

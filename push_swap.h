@@ -37,6 +37,7 @@ typedef struct		s_stack
 {
 	int				start;
 	int				argc;
+	int				acnt;
 	t_lst			**p;
 	t_lst			*head;
 	t_lst			*tail;
@@ -58,6 +59,8 @@ int					check_only_number(int ac, char **av);
 void				build_stack(t_stack *a, t_stack *b, char **av, int ac);
 void				error(void);
 void				lst_addtail_fast(char *str, t_lst **back);
+void				choose_stack(t_stack *a, t_stack *b, char **av, int ac);
+void				build_stack_2(t_stack *a, t_stack *b, char **av, int ac);
 
 /*
 **from instructions_for_moves.c file, instructions to execute in

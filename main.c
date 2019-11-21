@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 void	free_all(t_stack *a, t_list *command)
 {
@@ -39,12 +40,13 @@ int		main(int ac, char **av)
 	t_stack	b;
 	t_list	*command;
 
-	build_stack(&a, &b, av, ac);
-	if (!(a.p = malloc(sizeof(t_lst*) * ac)) ||
-	!(b.p = malloc(sizeof(t_lst*) * ac)))
+	choose_stack(&a, &b, av, ac);
+	// printf("%s\n%s", av[0], av[1]);
+	if (!(a.p = malloc(sizeof(t_lst*) * a.acnt)) ||
+	!(b.p = malloc(sizeof(t_lst*) * a.acnt)))
 		exit(1);
-	a.argc = ac;
-	b.argc = ac;
+	a.argc = a.acnt;
+	b.argc = a.acnt;
 	a.start = 0;
 	b.start = 0;
 	a.p[a.start] = NULL;
@@ -57,6 +59,6 @@ int		main(int ac, char **av)
 	}
 	free(b.p);
 	free_all(&a, command);
-//	while (1);                          Remove when submitting.
+//	while (1);						For memory leaks: run push_swap with this loop active, then "leaks push_swap"
 	return (0);
 }
