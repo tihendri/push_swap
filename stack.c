@@ -90,6 +90,7 @@ int		check_doubles(t_stack *a, int ac)
 **whether the t_lst exists and then adds the list.
 **Create a swap variable (temp) in order to create space to allocate
 **new values to list.
+**Use ft_atol instead of ft_atoi, in case number is larger than MAXINT.
 */
 
 void	lst_addtail_fast(char *str, t_lst **back)
@@ -99,10 +100,7 @@ void	lst_addtail_fast(char *str, t_lst **back)
 
 	num = ft_atol(str);
 	if (num > 2147483647 || num < -2147483648)
-	{
-		ft_putstr("Space_13");
 		error();
-	}
 	if (*back == NULL)
 		return ;
 	temp = malloc(sizeof(t_lst));
@@ -124,9 +122,7 @@ void	build_stack(t_stack *a, t_stack *b, char **av, int ac)
 
 	i = 1;
 	if (!check_only_number(ac, av) || !(a->head = malloc(sizeof(t_lst))))
-{		error();
-		ft_putstr("Space_1");
-}
+		error();
 	a->head->n = ft_atoi(av[i++]);
 	a->head->prev = NULL;
 	a->tail = a->head;
@@ -141,7 +137,6 @@ void	build_stack(t_stack *a, t_stack *b, char **av, int ac)
 			free(temp);
 		}
 		error();
-		ft_putstr("Space_2");
 	}
 	b->head = NULL;
 	b->tail = NULL;
@@ -154,9 +149,7 @@ void	build_stack_2(t_stack *a, t_stack *b, char **av, int ac)
 
 	i = 0;
 	if (!check_only_number(ac, av) || !(a->head = malloc(sizeof(t_lst))))
-	{	error();
-	ft_putstr("Space_1");
-	}
+		error();
 	a->head->n = ft_atoi(av[i++]);
 	a->head->prev = NULL;
 	a->tail = a->head;
@@ -171,7 +164,6 @@ void	build_stack_2(t_stack *a, t_stack *b, char **av, int ac)
 			free(temp);
 		}
 		error();
-		ft_putstr("Space_1");
 	}
 	b->head = NULL;
 	b->tail = NULL;

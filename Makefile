@@ -68,10 +68,6 @@ $(NAME_CH): $(OBJCH) $(LIBFT)
 	@gcc $(CFLAGS) $(OBJCH) $(LIB_BINARY) -o $@
 	@echo "$(GREEN)$@ compilation successful :)$(NC)"
 
-test: all
-	@perl ops.pl
-	./run.sh
-
 clean:
 	@echo "$(RED)deleting object files...$(NC)"
 	@/bin/rm -f $(OBJPS) $(OBJCH)

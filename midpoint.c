@@ -31,6 +31,7 @@ int	get_count(t_stack *s)
 
 /*
 **Finds wherever i is and splits the total in half.
+**Uses a "ft_swap" kind of function at lines 58-60.
 */
 
 int	get_true_median(t_stack *a)

@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 void	free_all(t_stack *a, t_list *command)
 {
@@ -41,7 +40,6 @@ int		main(int ac, char **av)
 	t_list	*command;
 
 	choose_stack(&a, &b, av, ac);
-	// printf("%s\n%s", av[0], av[1]);
 	if (!(a.p = malloc(sizeof(t_lst*) * a.acnt)) ||
 	!(b.p = malloc(sizeof(t_lst*) * a.acnt)))
 		exit(1);

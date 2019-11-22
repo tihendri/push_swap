@@ -98,7 +98,7 @@ int					get_true_median(t_stack *a);
 long				special_median_a(t_stack *a);
 int					big_a(t_stack *a, char *com, int med, int *t_rewind);
 void				split_a(t_stack *a, t_stack *b, int med, char *com);
-void				three_case(t_stack *a, char *temp);
+void				three_case_a(t_stack *a, char *temp);
 void				sort_a(t_stack *a, int count, char *temp);
 
 /*
@@ -109,7 +109,7 @@ void				sort_a(t_stack *a, int count, char *temp);
 long				special_median_b(t_stack *b);
 int					low_b(t_stack *b, char *com, int med, int count[2]);
 void				split_b(t_stack *a, t_stack *b, int med, char *com);
-void				three_caseb(t_stack *a, char *temp);
+void				three_case_b(t_stack *a, char *temp);
 void				sort_b(t_stack *b, int count, char *temp);
 
 /*

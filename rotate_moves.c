@@ -39,5 +39,5 @@ void	rb(t_all *all)
 void	rr(t_all *all)
 {
 	ra(all);
-	// rb(all);
+	rb(all);
 }

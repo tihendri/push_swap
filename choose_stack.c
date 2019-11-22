@@ -6,9 +6,7 @@ int     count_entries(char **args)
 
     i = 0;
     while (args[i] != '\0')
-    {
         i++;
-    }
     return (i);
 }
 

@@ -96,7 +96,7 @@ void	split_a(t_stack *a, t_stack *b, int med, char *com)
 	}
 }
 
-void	three_case(t_stack *a, char *temp)
+void	three_case_a(t_stack *a, char *temp)
 {
 	while (!(a->head->next->n < a->head->next->next->n
 	&& a->head->n < a->head->next->next->n))
@@ -132,5 +132,5 @@ void	sort_a(t_stack *a, int count, char *temp)
 		}
 		return ;
 	}
-	three_case(a, temp);
+	three_case_a(a, temp);
 }
