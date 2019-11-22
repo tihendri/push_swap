@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "checker.h"
-#include <limits.h>
 
 /*
 **this is a bonus function
@@ -72,14 +71,14 @@ int		main(int ac, char **av)
 	all->size = ft_array_size(all->args);
 	all->size_a = all->size;
 	fill_stack(all);
-	visualize_stacks(all);		//bonus
+	visualize_stacks(all);
 	check_duplicates(all);
 	if (check_sorted(all))
 		return (0);
 	while (get_next_line(0, &all->line) > 0)
 	{
 		check_moves(all, all->line);
-		visualize_stacks(all);		//bonus
+		visualize_stacks(all);
 		if (all->line)
 			ft_strdel(&all->line);
 	}
