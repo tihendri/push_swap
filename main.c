@@ -57,6 +57,6 @@ int		main(int ac, char **av)
 	}
 	free(b.p);
 	free_all(&a, command);
-//	while (1);						For memory leaks: run push_swap with this loop active, then "leaks push_swap"
+	// while (1);						//For memory leaks: run push_swap with this loop active, then "leaks push_swap"
 	return (0);
 }

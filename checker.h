@@ -47,8 +47,8 @@ typedef struct		s_all
 int					check_sorted(t_all *all);
 
 int					check_int(int *array, int c, int n);
-void				check_duplicates(t_all *all);
-
+void				check_duplicates(char **s);
+void				populate(int ac, char **av, t_all *all);
 int					check_digits(char *s);
 
 void				other_moves(t_all *all, char *line);
@@ -91,5 +91,8 @@ t_all				*initialize_struct(void);
 
 int					ft_int_too_big(int n);
 
-void				print_stacks(t_all *all);
+void				ft_puterror_exit(void);
+void				visualize_stacks(t_all *all);
+void				visualize_stacks_colour(t_all *all);
+void				print_stacks_bonus(t_all *all);
 #endif

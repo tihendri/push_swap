@@ -12,6 +12,12 @@
 
 #include "checker.h"
 
+void	ft_puterror_exit(void)
+{
+	ft_putstr_fd("\e[31mError\n", 2);
+	exit(EXIT_FAILURE);
+}
+
 void	error_check(t_all *all)
 {
 	int i;
@@ -23,8 +29,7 @@ void	error_check(t_all *all)
 		{
 			ft_array_free(&all->args);
 			free(all);
-			ft_putstr_fd("\e[31mError\n", 2);
-			exit(EXIT_FAILURE);
+			ft_puterror_exit();
 		}
 	}
 }

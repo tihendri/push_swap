@@ -21,12 +21,12 @@
 
 void	swapper(char *line, t_stack *a, t_stack *b)
 {
-	if (!ft_strcmp(line, "sa"))
+	if (!ft_strequ(line, "sa"))
 	{
 		swap(&a->head);
 		return ;
 	}
-	if (!ft_strcmp(line, "sb"))
+	if (!ft_strequ(line, "sb"))
 	{
 		swap(&b->head);
 		return ;

@@ -15,19 +15,31 @@
 void	rra(t_all *all)
 {
 	int i;
-
-	i = all->size_a;
-	while (--i > 0)
-		swap(&all->int_stack_a[i], &all->int_stack_a[i - 1]);
+	
+	if (all->int_stack_a[0])
+	{
+		if (all->int_stack_a[1])
+		{
+			i = all->size_a;
+			while (--i > 0)
+				swap(&all->int_stack_a[i], &all->int_stack_a[i - 1]);
+		}
+	}
 }
 
 void	rrb(t_all *all)
 {
 	int i;
 
-	i = all->size_b;
-	while (--i > 0)
-		swap(&all->int_stack_b[i], &all->int_stack_b[i - 1]);
+	if (all->int_stack_b[0])
+	{
+		if (all->int_stack_b[1])
+		{
+			i = all->size_b;
+			while (--i > 0)
+				swap(&all->int_stack_b[i], &all->int_stack_b[i - 1]);
+		}
+	}
 }
 
 void	rrr(t_all *all)

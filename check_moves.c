@@ -27,10 +27,7 @@ void	more_moves(t_all *all, char *line)
 	else if (!ft_strcmp(line, "rrr"))
 		rrr(all);
 	else
-	{
-		ft_putstr_fd("\e[31mError\n", 2);
-		exit(EXIT_FAILURE);
-	}
+		ft_puterror_exit();
 }
 
 void	check_moves(t_all *all, char *line)

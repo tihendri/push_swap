@@ -50,7 +50,7 @@ LIBFT		= libft/libft.a
 $(LIBFT):
 	@make -C libft re
 
-all: $(LIBFT) $(NAME_CH) $(NAME_PS) 
+all: $(LIBFT) $(NAME_CH) $(NAME_PS)
 
 $(OBJ):
 	@mkdir $@

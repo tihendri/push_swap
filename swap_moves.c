@@ -14,12 +14,24 @@
 
 void	sa(t_all *all)
 {
-	swap(&all->int_stack_a[0], &all->int_stack_a[1]);
+	if (all->int_stack_a[0])
+	{
+		if (all->int_stack_a[1])
+		{
+			swap(&all->int_stack_a[0], &all->int_stack_a[1]);
+		}
+	}
 }
 
 void	sb(t_all *all)
 {
-	swap(&all->int_stack_b[0], &all->int_stack_b[1]);
+	if (all->int_stack_b[0])
+	{
+		if (all->int_stack_b[1])
+		{
+			swap(&all->int_stack_b[0], &all->int_stack_b[1]);
+		}
+	}
 }
 
 void	ss(t_all *all)

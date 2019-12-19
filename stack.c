@@ -28,12 +28,12 @@ void	error(void)
 **If the number check fails, the function returns as incomplete (return (1))
 */
 
-int		check_only_number(int ac, char **av)
+int		check_only_number(int ac, char **av, t_stack *a)
 {
 	int i;
 	int	j;
 
-	if (ac == 2)
+	if (ac == 2 || a->acnt == 1)
 		i = 0;
 	else
 		i = 1;
@@ -68,6 +68,8 @@ int		check_doubles(t_stack *a, int ac)
 	int		arr[ac + 1];
 
 	temp = a->head;
+	if (temp->next == NULL)
+		return (1);
 	i = 0;
 	while (temp)
 	{
@@ -113,6 +115,7 @@ void	lst_addtail_fast(char *str, t_lst **back)
 
 /*
 **This is where the stack is created and values are allocated.
+**For multiple arguments.
 */
 
 void	build_stack(t_stack *a, t_stack *b, char **av, int ac)
@@ -121,7 +124,7 @@ void	build_stack(t_stack *a, t_stack *b, char **av, int ac)
 	t_lst	*temp;
 
 	i = 1;
-	if (!check_only_number(ac, av) || !(a->head = malloc(sizeof(t_lst))))
+	if (!check_only_number(ac, av, a) || !(a->head = malloc(sizeof(t_lst))))
 		error();
 	a->head->n = ft_atoi(av[i++]);
 	a->head->prev = NULL;
@@ -142,13 +145,17 @@ void	build_stack(t_stack *a, t_stack *b, char **av, int ac)
 	b->tail = NULL;
 }
 
-void	build_stack_2(t_stack *a, t_stack *b, char **av, int ac)
+/*
+**For string argument.
+*/
+
+void	build_stack_str(t_stack *a, t_stack *b, char **av, int ac)
 {
 	int		i;
 	t_lst	*temp;
 
 	i = 0;
-	if (!check_only_number(ac, av) || !(a->head = malloc(sizeof(t_lst))))
+	if (!check_only_number(ac, av, a) || !(a->head = malloc(sizeof(t_lst))))
 		error();
 	a->head->n = ft_atoi(av[i++]);
 	a->head->prev = NULL;

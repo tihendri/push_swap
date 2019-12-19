@@ -15,21 +15,25 @@
 int	check_digits(char *s)
 {
 	int i;
-	int n;
+	long n;
 
 	i = 0;
-	n = ft_atoi(&s[i]);
-	while (i < (int)ft_strlen(s))
+	if (s[i] >= 48 && s[i] <= 57)
 	{
-		n = ft_atoi(&s[i]);
-		if (s[i] != '+' && s[i] != '-' &&
-				!ft_isdigit(s[i]) && ft_int_too_big(n))
+		while (i < (int)ft_strlen(s))
 		{
-			ft_putstr_fd("\e[31mError\n\e[0m", 2);
-			exit(EXIT_FAILURE);
+			n = ft_atol(&s[i]);
+			if (n < 2147483647)
+				n = ft_atoi(&s[i]);
+			else
+				ft_puterror_exit();
+			if (s[i] != '+' && s[i] != '-' && !ft_isdigit(s[i]))
+				ft_puterror_exit();
+			i++;
 		}
-		i++;
 	}
+	else
+		ft_puterror_exit();
 	i = -1;
 	while (++i < (int)ft_strlen(s))
 		if ((s[i] == '+' || s[i] == '-') && !ft_isdigit(s[i + 1]))
