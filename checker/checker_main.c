@@ -48,9 +48,9 @@ void	print_stacks_bonus(t_all *all)
 {
 	// av = NULL;
 	// if (ft_strequ(av[2], "-v"))
-		visualize_stacks(all);
+		// visualize_stacks(all);
 	// else if (ft_strequ(av[2], "-c"))
-		// visualize_stacks_colour(all);
+		visualize_stacks_colour(all);
 	// else
 	// 	ft_puterror_exit();
 }
@@ -87,9 +87,6 @@ void		put_ok_ko(t_all *all)
 
 void	populate(int ac, char **av, t_all *all)
 {
-	int i;
-
-	i = 0;
 	if (ac == 2 || (ac == 3 && ft_strequ(av[2], "-v")) || (ac == 3 && ft_strequ(av[2], "-c")))
 	{
 		all->args = ft_strsplit(av[1], ' ');//join_arguments(&av[1]);
