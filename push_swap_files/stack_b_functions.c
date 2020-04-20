@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-long	special_median_b(t_stack *b)
+long		special_median_b(t_stack *b)
 {
 	t_lst	*temp;
 	int		arr[7];
@@ -23,7 +23,7 @@ long	special_median_b(t_stack *b)
 	i = 0;
 	while (temp != b->p[b->start])
 	{
-		arr[i++] = temp->n;
+		arr[i++] = temp->value;
 		temp = temp->next;
 	}
 	j[0] = -1;
@@ -42,17 +42,24 @@ long	special_median_b(t_stack *b)
 }
 
 /*
-**works with lower stack_b size
+**This function will check the values on the stack:
+**if the number is smaller than the median, rotate it to the back
+**of the stack.
+**This is so that numbers that should be at the front of the stack,
+**i.e. smaller numbers, can be pushed to the front in numerical order
+**from smallest to largest.
+**This function works opporsite to the "num_larger_than_median"
+**function in stack_a_functions.c file
 */
 
-int		low_b(t_stack *b, char *com, int med, int count[2])
+static int	smaller_than_median(t_stack *b, char *com, int med, int count[2])
 {
 	int		skips;
 	t_lst	*temp;
 
 	skips = 0;
 	temp = b->head;
-	while (temp != b->p[b->start] && temp->n <= med)
+	while (temp != b->p[b->start] && temp->value <= med)
 	{
 		skips++;
 		temp = temp->next;
@@ -69,10 +76,12 @@ int		low_b(t_stack *b, char *com, int med, int count[2])
 }
 
 /*
-**splits stack_b by median/middle
+**This function will be the "driving force" of the operations
+**for stack B, by continuously pushing to stack A if the number
+**is higher than the median
 */
 
-void	split_b(t_stack *a, t_stack *b, int med, char *com)
+void		work_stack_b(t_stack *a, t_stack *b, int med, char *com)
 {
 	int		count[2];
 
@@ -80,12 +89,12 @@ void	split_b(t_stack *a, t_stack *b, int med, char *com)
 	count[1] = 0;
 	while (b->head != b->p[b->start])
 	{
-		if (b->head->n > med)
+		if (b->head->value > med)
 		{
 			push(&b->head, &a->head, &a->tail);
 			ft_strcat(com, "pa\n");
 		}
-		else if (!(low_b(b, com, med, count)))
+		else if (!(smaller_than_median(b, com, med, count)))
 			break ;
 	}
 	while (b->p[b->start] && --count[0] >= 0)
@@ -95,13 +104,19 @@ void	split_b(t_stack *a, t_stack *b, int med, char *com)
 	}
 }
 
-void	three_case_b(t_stack *a, char *temp)
+/*
+**Similar to the situation of stack A, however this time
+**the three lowest values are left behind on stack B,
+**this function sorts those three values in descending order.
+*/
+
+static void	last_three_numbers_stack_b(t_stack *a, char *temp)
 {
-	while (!(a->head->next->n > a->head->next->next->n
-	&& a->head->n > a->head->next->next->n))
+	while (!(a->head->next->value > a->head->next->next->value
+	&& a->head->value > a->head->next->next->value))
 	{
-		if (a->head->next->n < a->head->next->next->n
-		&& a->head->next->n < a->head->n)
+		if (a->head->next->value < a->head->next->next->value
+		&& a->head->next->value < a->head->value)
 		{
 			rev_rotate(&a->head, &a->tail);
 			ft_strcat(temp, "rrb\n");
@@ -112,13 +127,19 @@ void	three_case_b(t_stack *a, char *temp)
 			ft_strcat(temp, "rb\n");
 		}
 	}
-	if (!(a->head->next->n > a->head->n))
+	if (!(a->head->next->value > a->head->value))
 		return ;
 	swap(&a->head);
 	ft_strcat(temp, "sb\n");
 }
 
-void	sort_b(t_stack *b, int count, char *temp)
+/*
+**This function will sort/deal with the remaining three numbers
+**after all the operations have been performed on the smaller
+**numbers.
+*/
+
+void		sort_stack_b_last_three(t_stack *b, int count, char *temp)
 {
 	if (b->start)
 		b->start--;
@@ -126,12 +147,12 @@ void	sort_b(t_stack *b, int count, char *temp)
 		return ;
 	if (count == 2)
 	{
-		if (b->head->next && b->head->next->n > b->head->n)
+		if (b->head->next && b->head->next->value > b->head->value)
 		{
 			swap(&b->head);
 			ft_strcat(temp, "sb\n");
 		}
 		return ;
 	}
-	three_case_b(b, temp);
+	last_three_numbers_stack_b(b, temp);
 }

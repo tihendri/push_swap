@@ -16,7 +16,7 @@
 **displays error and terminates the rest of the code.
 */
 
-void	error(void)
+static void	error(void)
 {
 	ft_putstr("Error\n");
 	exit(1);
@@ -28,12 +28,12 @@ void	error(void)
 **If the number check fails, the function returns as incomplete (return (1))
 */
 
-int		check_only_number(int ac, char **av, t_stack *a)
+static int	check_only_number(int ac, char **av, t_stack *a)
 {
 	int i;
 	int	j;
 
-	if (ac == 2 || a->acnt == 1)
+	if (ac == 2 || a->argc_temp == 1)
 		i = 0;
 	else
 		i = 1;
@@ -59,7 +59,7 @@ int		check_only_number(int ac, char **av, t_stack *a)
 **Returns incomplete if there are doubles (return (1)).
 */
 
-int		check_doubles(t_stack *a, int ac)
+static int	check_doubles(t_stack *a, int ac)
 {
 	t_lst	*temp;
 	int		i;
@@ -73,7 +73,7 @@ int		check_doubles(t_stack *a, int ac)
 	i = 0;
 	while (temp)
 	{
-		arr[i++] = temp->n;
+		arr[i++] = temp->value;
 		temp = temp->next;
 	}
 	j = -1;
@@ -95,7 +95,7 @@ int		check_doubles(t_stack *a, int ac)
 **Use ft_atol instead of ft_atoi, in case number is larger than MAXINT.
 */
 
-void	lst_addtail_fast(char *str, t_lst **back)
+static void	lst_addtail_fast(char *str, t_lst **back, t_lst *holder)
 {
 	t_lst	*temp;
 	long	num;
@@ -105,12 +105,15 @@ void	lst_addtail_fast(char *str, t_lst **back)
 		error();
 	if (*back == NULL)
 		return ;
-	temp = malloc(sizeof(t_lst));
-	temp->n = (int)num;
+	if (!(temp = malloc(sizeof(t_lst))))
+		error();
+	temp->value = (int)num;
 	temp->next = NULL;
 	(*back)->next = temp;
 	temp->prev = *back;
 	*back = temp;
+	temp = holder;
+	free(temp);
 }
 
 /*
@@ -118,19 +121,21 @@ void	lst_addtail_fast(char *str, t_lst **back)
 **For multiple arguments.
 */
 
-void	build_stack(t_stack *a, t_stack *b, char **av, int ac)
+void		build_stack(t_stack *a, t_stack *b, char **av, int ac)
 {
 	int		i;
 	t_lst	*temp;
+	t_lst	*holder;
 
 	i = 1;
+	holder = NULL;
 	if (!check_only_number(ac, av, a) || !(a->head = malloc(sizeof(t_lst))))
 		error();
-	a->head->n = ft_atoi(av[i++]);
+	a->head->value = ft_atoi(av[i++]);
 	a->head->prev = NULL;
 	a->tail = a->head;
 	while (i < ac)
-		lst_addtail_fast(av[i++], &a->tail);
+		lst_addtail_fast(av[i++], &a->tail, holder);
 	if (!check_doubles(a, ac))
 	{
 		while (a->head)
@@ -149,19 +154,21 @@ void	build_stack(t_stack *a, t_stack *b, char **av, int ac)
 **For string argument.
 */
 
-void	build_stack_str(t_stack *a, t_stack *b, char **av, int ac)
+void		build_stack_str(t_stack *a, t_stack *b, char **av, int ac)
 {
 	int		i;
 	t_lst	*temp;
+	t_lst	*holder;
 
 	i = 0;
+	holder = NULL;
 	if (!check_only_number(ac, av, a) || !(a->head = malloc(sizeof(t_lst))))
 		error();
-	a->head->n = ft_atoi(av[i++]);
+	a->head->value = ft_atoi(av[i++]);
 	a->head->prev = NULL;
 	a->tail = a->head;
 	while (i < ac)
-		lst_addtail_fast(av[i++], &a->tail);
+		lst_addtail_fast(av[i++], &a->tail, holder);
 	if (!check_doubles(a, ac))
 	{
 		while (a->head)

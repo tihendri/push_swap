@@ -12,7 +12,15 @@
 
 #include "push_swap.h"
 
-long	special_median_a(t_stack *a)
+/*
+**This function is used to get the median of the stack when there's fewer
+**arguments.
+**This heps with effieciency by lowering the amount of moves made when
+**the arguments are fewer.
+**This function is specifically created for the evaluation of this project.
+*/
+
+long		low_args_median_a(t_stack *a)
 {
 	t_lst	*temp;
 	int		arr[12];
@@ -23,7 +31,7 @@ long	special_median_a(t_stack *a)
 	i = 0;
 	while (temp != a->p[a->start])
 	{
-		arr[i++] = temp->n;
+		arr[i++] = temp->value;
 		temp = temp->next;
 	}
 	j[0] = -1;
@@ -42,37 +50,45 @@ long	special_median_a(t_stack *a)
 }
 
 /*
-**work with larger stack
+**This function will check the values on the stack:
+**if the number is larger than the median, rotate it to the back
+**of the stack.
+**This is because we want to get the three biggest numbers
+**remaining on stack A.
+**This function works opporsite to the "num_smaller_than_median"
+**function in stack_b_functions.c file
 */
 
-int		big_a(t_stack *a, char *com, int med, int *t_rewind)
+static int	over_median(t_stack *a, char *command, int median, int *t_rewind)
 {
-	int		skips;
 	t_lst	*temp;
+	int		counter;
 
-	skips = 0;
 	temp = a->head;
-	while (temp != a->p[a->start] && temp->n > med)
+	counter = 0;
+	while (temp != a->p[a->start] && temp->value > median)
 	{
-		skips++;
+		counter++;
 		temp = temp->next;
 	}
 	if (temp == a->p[a->start])
 		return (0);
-	*t_rewind = *t_rewind + skips;
-	while (skips--)
+	*t_rewind = *t_rewind + counter;
+	while (counter--)
 	{
 		rotate(&a->head, &a->tail);
-		ft_strcat(com, "ra\n");
+		ft_strcat(command, "ra\n");
 	}
 	return (1);
 }
 
 /*
-**splits stack_a at the median/middle
+**This function will be the "driving force" of the operations
+**for stack B, by continuously pushing to stack A if the number
+**on stack A falls below median
 */
 
-void	split_a(t_stack *a, t_stack *b, int med, char *com)
+void		work_stack_a(t_stack *a, t_stack *b, int median, char *command)
 {
 	int		rewind;
 
@@ -81,28 +97,34 @@ void	split_a(t_stack *a, t_stack *b, int med, char *com)
 		b->p[++(b->start)] = b->head;
 	while (a->head != a->p[a->start])
 	{
-		if (a->head->n <= med)
+		if (a->head->value <= median)
 		{
 			push(&a->head, &b->head, &b->tail);
-			ft_strcat(com, "pb\n");
+			ft_strcat(command, "pb\n");
 		}
-		else if (!(big_a(a, com, med, &rewind)))
+		else if (!(over_median(a, command, median, &rewind)))
 			break ;
 	}
 	while (a->p[a->start] && --rewind >= 0)
 	{
 		rev_rotate(&a->head, &a->tail);
-		ft_strcat(com, "rra\n");
+		ft_strcat(command, "rra\n");
 	}
 }
 
-void	three_case_a(t_stack *a, char *temp)
+/*
+**After all operations pushing to stack B,
+**the three highest values are left behind on stack A,
+**this function sorts those three values. 
+*/
+
+static void	last_three_numbers_stack_a(t_stack *a, char *temp)
 {
-	while (!(a->head->next->n < a->head->next->next->n
-	&& a->head->n < a->head->next->next->n))
+	while (!(a->head->next->value < a->head->next->next->value
+	&& a->head->value < a->head->next->next->value))
 	{
-		if (a->head->next->n > a->head->next->next->n
-		&& a->head->next->n > a->head->n)
+		if (a->head->next->value > a->head->next->next->value
+		&& a->head->next->value > a->head->value)
 		{
 			rev_rotate(&a->head, &a->tail);
 			ft_strcat(temp, "rra\n");
@@ -113,24 +135,30 @@ void	three_case_a(t_stack *a, char *temp)
 			ft_strcat(temp, "ra\n");
 		}
 	}
-	if (!(a->head->next->n < a->head->n))
+	if (!(a->head->next->value < a->head->value))
 		return ;
 	swap(&a->head);
 	ft_strcat(temp, "sa\n");
 }
 
-void	sort_a(t_stack *a, int count, char *temp)
+/*
+**This function will sort/deal with the remaining three numbers
+**after all the operations have been performed on the smaller
+**numbers.
+*/
+
+void		sort_stack_a_last_three(t_stack *a, int count, char *temp)
 {
 	if (count == 1)
 		return ;
 	if (count == 2)
 	{
-		if (a->head->next->n < a->head->n)
+		if (a->head->next->value < a->head->value)
 		{
 			swap(&a->head);
 			ft_strcat(temp, "sa\n");
 		}
 		return ;
 	}
-	three_case_a(a, temp);
+	last_three_numbers_stack_a(a, temp);
 }

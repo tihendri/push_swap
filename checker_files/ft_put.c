@@ -1,41 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap_moves.c                                       :+:      :+:    :+:   */
+/*   ft_put.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/10 15:55:23 by tihendri          #+#    #+#             */
-/*   Updated: 2019/09/12 13:34:08 by tihendri         ###   ########.fr       */
+/*   Created: 2019/09/12 14:27:15 by tihendri          #+#    #+#             */
+/*   Updated: 2019/09/12 22:56:03 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	sa(t_all *all)
+/*
+**Used almost everywhere there's an error
+*/
+
+void	ft_puterror_exit(void)
 {
-	if (all->int_stack_a[0])
-	{
-		if (all->int_stack_a[1])
-		{
-			swap(&all->int_stack_a[0], &all->int_stack_a[1]);
-		}
-	}
+	ft_putstr_fd("\e[1;31mError\n", 2);
+	exit(EXIT_FAILURE);
 }
 
-void	sb(t_all *all)
-{
-	if (all->int_stack_b[0])
-	{
-		if (all->int_stack_b[1])
-		{
-			swap(&all->int_stack_b[0], &all->int_stack_b[1]);
-		}
-	}
-}
+/*
+**Called in main function.
+**Checks whether all numbers are sorted, then displays appropriate
+**response.
+*/
 
-void	ss(t_all *all)
+void		put_ok_ko(t_all *all)
 {
-	sa(all);
-	sb(all);
+	if (check_sorted(all) && (all->size_b == 0))
+		ft_putstr_fd("\e[32mOK\n\e[0m", 2);
+	else
+		ft_putstr_fd("\e[31mKO\n\e[0m", 2);
 }

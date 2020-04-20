@@ -15,26 +15,30 @@
 NAME_PS	= push_swap
 NAME_CH	= checker
 
-PS_SRC	= algo_solve.c commands_for_moves.c instructions.c \
-		  main.c midpoint.c stack.c stack_a_functions.c stack_b_functions.c \
-		  choose_stack.c
+PS_SRC	= push_swap_files/solver.c \
+		  push_swap_files/instructions.c \
+		  push_swap_files/main.c \
+		  push_swap_files/median.c \
+		  push_swap_files/stack.c \
+		  push_swap_files/stack_a_functions.c \
+		  push_swap_files/stack_b_functions.c \
+		  push_swap_files/choose_stack.c
 
-CH_SRC	= check_sorted.c check_digits.c \
-		  check_duplicates.c check_moves.c \
-		  checker_main.c error_check.c \
-		  fill_stack.c free_all.c \
-		  ft_array_free.c ft_array_join.c \
-		  ft_array_size.c initialize_struct.c \
-		  push_moves.c reverse_rotate_moves.c \
-		  rotate_moves.c swap.c \
-		  swap_moves.c ft_int_too_big.c
+CH_SRC	= checker_files/check_sorted.c \
+		  checker_files/exec_moves.c \
+		  checker_files/checker_main.c \
+		  checker_files/ft_put.c \
+		  checker_files/error_check.c \
+		  checker_files/populate_stack.c \
+		  checker_files/ft_array_func.c \
+		  checker_files/initialize_struct.c \
+		  checker_files/all_moves.c \
+		  checker_files/visualize.c
 
 CFLAGS	= -Wall -Wextra -Werror
 
-OBJ		= object_files
-
-OBJPS	= $(addprefix $(OBJ)/,$(PS_SRC:.c=.o))
-OBJCH	= $(addprefix $(OBJ)/,$(CH_SRC:.c=.o))
+OBJPS	= $(PS_SRC:.c=.o)
+OBJCH	= $(CH_SRC:.c=.o)
 
 .PHONY: all clean fclean re
 
@@ -47,9 +51,6 @@ LIBFT_HDR 	= -I./libft/includes
 LIB_BINARY	= -L./libft -lft
 LIBFT		= libft/libft.a
 
-$(LIBFT):
-	@make -C libft re
-
 all: $(LIBFT) $(NAME_CH) $(NAME_PS)
 
 $(OBJ):
@@ -57,6 +58,9 @@ $(OBJ):
 
 $(OBJ)/%.o: %.c | $(OBJ)
 	@$(CC) $(CFLAGS) $(HDR) $(LIBFT_HDR) -c $< -o $@
+
+$(LIBFT):
+	@make -C libft re
 
 $(NAME_PS): $(OBJPS) $(LIBFT)
 	@echo "$(GREEN)compiling $@...$(NC)"

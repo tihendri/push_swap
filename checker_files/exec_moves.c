@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_moves.c                                      :+:      :+:    :+:   */
+/*   exec_moves.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -13,10 +13,14 @@
 #include "checker.h"
 
 /*
+**Used in main function,
 **extra function created to respect the norm of max 25 lines per function.
+**This function checks if the moves parsed to checker are valid moves,
+**in which case it allows the move to be executed.
+**Otherwise it calls function "ft_puterror_exit".
 */
 
-void	more_moves(t_all *all, char *line)
+static void	more_moves(t_all *all, char *line)
 {
 	if (!ft_strcmp(line, "rr"))
 		rr(all);
@@ -30,7 +34,7 @@ void	more_moves(t_all *all, char *line)
 		ft_puterror_exit();
 }
 
-void	check_moves(t_all *all, char *line)
+void		exec_moves(t_all *all, char *line)
 {
 	if (!ft_strcmp(line, "sa"))
 		sa(all);

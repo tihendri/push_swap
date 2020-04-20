@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_check.c                                      :+:      :+:    :+:   */
+/*   check_sorted.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/12 14:29:18 by tihendri          #+#    #+#             */
-/*   Updated: 2019/09/12 22:56:03 by tihendri         ###   ########.fr       */
+/*   Created: 2019/09/10 14:41:47 by tihendri          #+#    #+#             */
+/*   Updated: 2019/09/19 23:21:05 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	ft_puterror_exit(void)
-{
-	ft_putstr_fd("\e[31mError\n", 2);
-	exit(EXIT_FAILURE);
-}
+/*
+**Called by function "put_ok_ko"
+**Checks whether each value is smaller than the next.
+**This function is only used on stack A because all the values need to be
+**sorted on stack A and stack B needs to be empty.
+*/
 
-void	error_check(t_all *all)
+int	check_sorted(t_all *all)
 {
-	int i;
+	unsigned int i;
 
-	i = -1;
-	while (all->args[++i])
+	i = 0;
+	while (i < all->size_a - 1)
 	{
-		if (!check_digits(all->args[i]))
-		{
-			ft_array_free(&all->args);
-			free(all);
-			ft_puterror_exit();
-		}
+		if (all->int_stack_a[i] > all->int_stack_a[i + 1])
+			return (0);
+		i++;
 	}
+	return (1);
 }

@@ -12,87 +12,87 @@
 
 #ifndef CHECKER_H
 # define CHECKER_H
+# define MAXINT 2147483648
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <stdlib.h>
 # include <stdio.h>
 
 typedef struct		s_all
 {
-	int			*int_stack_a;
-	int			*int_stack_b;
-	char		**args;
-	int			size;
-	char		*line;
-	int			size_a;
-	int			size_b;
-	int			*sorted;
-	char		**stack;
-	char		**stack_a;
-	char		**tmp;
-	int			k;
-	int			m;
-	int			a_counter;
-	int			b_counter;
-	int			i;
-	int			j;
-	int			b;
-	int			count;
-	int			a_stack_size;
-	int			low;
-	int			mid;
-	int			high;
+	char			**args;
+	char			*line;
+	unsigned int	*int_stack_a;
+	unsigned int	*int_stack_b;
+	unsigned int	size;
+	unsigned int	size_a;
+	unsigned int	size_b;
 }					t_all;
+
+/*
+**check_sorted.c
+*/
 
 int					check_sorted(t_all *all);
 
-int					check_int(int *array, int c, int n);
-void				check_duplicates(char **s);
-void				populate(int ac, char **av, t_all *all);
-int					check_digits(char *s);
+/*
+**initialize_struct.c
+*/
 
-void				other_moves(t_all *all, char *line);
-void				check_moves(t_all *all, char *line);
+t_all				*initialize_struct(void);
+
+/*
+**exec_moves.c
+*/
+
+void				exec_moves(t_all *all, char *line);
+
+/*
+**error_check.c
+*/
 
 void				error_check(t_all *all);
 
-void				free_all(t_all *all);
-
-void				ft_array_free(char ***array);
-
-char				**ft_array_join(char **arr1, char **arr2);
+/*
+**ft_array_func.c
+*/
 
 int					ft_array_size(char **arr);
+void				ft_array_free(char ***array);
+
+/*
+**populate_stack.c
+*/
+
+void				populate_stack(int ac, char **av, t_all *all);
+
+/*
+**all_moves.c
+*/
 
 void				pa(t_all *all);
 void				pb(t_all *all);
-
 void				rra(t_all *all);
 void				rrb(t_all *all);
 void				rrr(t_all *all);
-
 void				ra(t_all *all);
 void				rb(t_all *all);
 void				rr(t_all *all);
-
-void				swap(int *a, int *b);
-
 void				sa(t_all *all);
 void				sb(t_all *all);
 void				ss(t_all *all);
 
-void				swap(int *a, int *b);
-
-char				**join_arguments(char **av);
-void				put_ok_ko(t_all *all);
-
-void				fill_stack(t_all *all);
-t_all				*initialize_struct(void);
-
-int					ft_int_too_big(int n);
+/*
+**ft_put.c
+*/
 
 void				ft_puterror_exit(void);
-void				visualize_stacks(t_all *all);
-void				visualize_stacks_colour(t_all *all);
-void				print_stacks_bonus(t_all *all);
+void				put_ok_ko(t_all *all);
+
+/*
+**visualize.c
+*/
+void				print_stacks_bonus(t_all *all, char **av);
+
+// void				free_all(t_all *all); //Not being used rn, might be causing double free
 #endif

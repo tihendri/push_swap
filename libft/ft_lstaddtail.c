@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_int_too_big.c                                   :+:      :+:    :+:   */
+/*   ft_lstaddtail.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/13 07:35:56 by tihendri          #+#    #+#             */
-/*   Updated: 2019/09/13 07:37:20 by tihendri         ###   ########.fr       */
+/*   Created: 2019/08/12 12:03:46 by tihendri          #+#    #+#             */
+/*   Updated: 2019/08/12 12:04:41 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#include "libft.h"
 
-int	ft_int_too_big(int n)
+void	ft_lstaddtail(t_list **alst, t_list *new)
 {
-	if (n > 2147483647)
-		return (1);
-	return (0);
+	t_list *temp;
+
+	temp = *alst;
+	if (temp == NULL)
+	{
+		*alst = new;
+		new->next = NULL;
+	}
+	else
+	{
+		while (temp->next != NULL)
+			temp = temp->next;
+		temp->next = new;
+		new->next = NULL;
+	}
 }

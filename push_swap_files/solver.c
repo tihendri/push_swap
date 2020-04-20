@@ -12,7 +12,12 @@
 
 #include "push_swap.h"
 
-int		split_stack_a(t_stack *a, t_stack *b, t_list **command)
+/*
+**This function takes care of the numbers on stack A according to the amount
+**of arguments parsed, by assigning an appropriate median to them and 
+*/
+
+static int	send_from_stack_a(t_stack *a, t_stack *b, t_list **command)
 {
 	int		count;
 	long	median;
@@ -22,37 +27,21 @@ int		split_stack_a(t_stack *a, t_stack *b, t_list **command)
 	count = get_count(a);
 	median = NO_MEDIAN;
 	if (count <= 11 && count > 2)
-		median = special_median_a(a);
+		median = low_args_median_a(a);
 	else if (count > 11)
-		median = get_true_median(a);
+		median = real_median(a);
 	if (median != NO_MEDIAN)
-		split_a(a, b, (int)median, temp);
+		work_stack_a(a, b, (int)median, temp);
 	else
-		sort_a(a, count, temp);
+		sort_stack_a_last_three(a, count, temp);
 	if (temp[0])
-		ft_lstaddend(command, ft_lstnew_str(temp));
+		ft_lstaddtail(command, ft_lstnew_str(temp));
 	if (median == NO_MEDIAN)
 		a->p[++(a->start)] = a->head;
 	return ((median == NO_MEDIAN) ? 1 : 0);
 }
 
-int		sorted(t_stack *a)
-{
-	t_lst	*temp;
-
-	temp = a->head;
-	while (temp)
-	{
-		if (temp->next && temp->next->n < temp->n)
-			return (0);
-		temp = temp->next;
-		if (temp == a->p[a->start])
-			break ;
-	}
-	return (1);
-}
-
-void	push_b(t_stack *b, t_stack *a, int count, char *temp)
+static void	push_b(t_stack *b, t_stack *a, int count, char *temp)
 {
 	int i;
 
@@ -65,7 +54,7 @@ void	push_b(t_stack *b, t_stack *a, int count, char *temp)
 	}
 }
 
-void	b_to_a(t_stack *a, t_stack *b, t_list **command)
+static void	send_from_stack_b(t_stack *a, t_stack *b, t_list **command)
 {
 	int		count;
 	long	median;
@@ -77,18 +66,34 @@ void	b_to_a(t_stack *a, t_stack *b, t_list **command)
 	if (count <= 6 && count > 2)
 		median = special_median_b(b);
 	else if (count > 6)
-		median = get_true_median(b);
+		median = real_median(b);
 	if (median != NO_MEDIAN)
-		split_b(a, b, (int)median, temp);
+		work_stack_b(a, b, (int)median, temp);
 	else
-		sort_b(b, count, temp);
+		sort_stack_b_last_three(b, count, temp);
 	if (median == NO_MEDIAN)
 		push_b(b, a, count, temp);
 	if (temp[0])
-		ft_lstaddend(command, ft_lstnew_str(temp));
+		ft_lstaddtail(command, ft_lstnew_str(temp));
 }
 
-t_list	*solver(t_stack *a, t_stack *b)
+static int	sorted(t_stack *a)
+{
+	t_lst	*temp;
+
+	temp = a->head;
+	while (temp)
+	{
+		if (temp->next && temp->next->value < temp->value)
+			return (0);
+		temp = temp->next;
+		if (temp == a->p[a->start])
+			break ;
+	}
+	return (1);
+}
+
+t_list		*solver(t_stack *a, t_stack *b)
 {
 	t_list	*command;
 	int		ret;
@@ -99,14 +104,14 @@ t_list	*solver(t_stack *a, t_stack *b)
 	{
 		if (!sort)
 		{
-			while ((ret = split_stack_a(a, b, &command)) == 0)
+			while ((ret = send_from_stack_a(a, b, &command)) == 0)
 				;
 			if (ret == -1)
 				exit(1);
 		}
 		else
 			a->p[++(a->start)] = a->head;
-		b_to_a(a, b, &command);
+		send_from_stack_b(a, b, &command);
 	}
 	return (command);
 }

@@ -34,7 +34,7 @@ int	get_count(t_stack *s)
 **Uses a "ft_swap" kind of function at lines 58-60.
 */
 
-int	get_true_median(t_stack *a)
+int	real_median(t_stack *a)
 {
 	t_lst	*temp;
 	int		arr[a->argc + 1];
@@ -45,7 +45,7 @@ int	get_true_median(t_stack *a)
 	i = 0;
 	while (temp != a->p[a->start])
 	{
-		arr[i++] = temp->n;
+		arr[i++] = temp->value;
 		temp = temp->next;
 	}
 	j[0] = -1;

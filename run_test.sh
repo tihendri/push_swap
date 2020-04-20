@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Change Limit for different test size limits!
-LIMIT=700
+LIMIT=5500
 
 MAX_OPS=0
 MAX_ARG=0
@@ -19,27 +19,25 @@ for i in {1..10}
 do
 	ARG=$(sh GenRandNums.sh)
 	echo "${PURPLE}Trial: $i${NC}"
-	printf "Number of operations needed: " 
 	NUM=$(./push_swap $ARG | wc -l) 
-	TOTAL=$((TOTAL+$NUM))
-	if [[ "$NUM" -gt $MAX_OPS ]] 
+	TOTAL=$(($TOTAL+$NUM))
+	if [ $NUM -gt $MAX_OPS ] 
 	then
 		MAX_OPS=$NUM	
 		MAX_ARG=$ARG
 	fi
-	if [[ "$NUM" -gt $LIMIT ]] 
+	if [ $NUM -gt $LIMIT ] 
 	then
 		echo "${RED}Your program took $NUM operations; The limit is $LIMIT!${NC}"
 		echo "Here's the Arg: $ARG"
 		continue
 	fi	
 	echo "${BOLD}${BLUE}$NUM${NC}"
-	printf "Checker: "
 	RES=$(./push_swap $ARG | ./checker $ARG)
-	if [ "$RES" == "OK" ]
+	if [ "$RES" = "OK" ]
 	then
 		echo ${LIGHT_GREEN}"SUCCESS for Trial $i!${NC}"
-	elif [ "$RES" == "KO" ]
+	elif [ "$RES" = "KO" ]
 	then
 		echo ${RED}"FAILURE for Trial $i!${NC}"
 		echo "Here's the Arg: $ARG"
@@ -47,4 +45,7 @@ do
 	echo "------------------------------"
 done
 echo "--------------------------------"
+echo "Number of operations: ${GREEN}${NUM}${NC}"
+echo "Limit of operations: ${RED}${LIMIT}${NC}"
 echo "Avg operations: ${PURPLE}$((TOTAL/10))${NC}"
+echo "Score out of 5: ${PURPLE}$((5))${NC}"

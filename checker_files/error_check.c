@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_digits.c                                     :+:      :+:    :+:   */
+/*   error_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,7 +12,13 @@
 
 #include "checker.h"
 
-int	check_digits(char *s)
+/*
+**Used in function called "error_check" in the file error_check.c,
+**in a while loop.
+**This function checks if the values parsed are valid, per digit.
+*/
+
+static int	check_digits(char *s)
 {
 	int i;
 	long n;
@@ -39,4 +45,56 @@ int	check_digits(char *s)
 		if ((s[i] == '+' || s[i] == '-') && !ft_isdigit(s[i + 1]))
 			return (0);
 	return (1);
+}
+
+/*
+**Used by function called "populate" in main.
+**This function checks for duplicate values.
+*/
+
+static void	check_duplicates(char **s)
+{
+	int i;
+	int j;
+	int args;
+
+	i = 0;
+	args = 0;
+	while (s[args])
+		args++;
+	while (i < args - 1)
+	{
+		j = i + 1;
+		while (s[j])
+		{
+			if (s[i] == s[j] || ft_atol(s[i]) == ft_atol(s[j]))
+				ft_puterror_exit();
+			else
+				j++;
+		}
+		i++;
+	}
+}
+
+/*
+**Used in function called "populate" in main
+**This function will be used as validation.
+**The correct type of digit as well as checking for duplicates.
+*/
+
+void		error_check(t_all *all)
+{
+	int i;
+
+	i = -1;
+	while (all->args[++i])
+	{
+		check_duplicates(all->args);
+		if (!check_digits(all->args[i]))
+		{
+			ft_array_free(&all->args);
+			free(all);
+			ft_puterror_exit();
+		}
+	}
 }

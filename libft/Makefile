@@ -34,7 +34,7 @@ PART2	= ft_memalloc.c ft_memdel.c ft_strnew.c ft_strdel.c ft_strclr.c \
 		ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
 
 BONUS	= ft_lstadd.c ft_lstnew.c ft_lstdelone.c ft_lstdel.c \
-		  ft_lstiter.c ft_lstmap.c ft_lstnew_str.c ft_lstaddend.c
+		  ft_lstiter.c ft_lstmap.c ft_lstnew_str.c ft_lstaddtail.c
 
 EXTRA	= ft_wordcount.c ft_strndup.c ft_realloc.c ft_count_letters.c \
 		  ft_iswhitespace.c get_next_line.c ft_atol.c

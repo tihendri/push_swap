@@ -12,27 +12,6 @@
 
 #include "push_swap.h"
 
-void	print_stacks(t_lst *a, t_lst *b, char *line)
-{
-	t_lst *temp;
-
-	temp = a;
-	ft_putendl(line);
-	while (temp != NULL)
-	{
-		ft_putnbr(temp->n);
-		temp = temp->next;
-	}
-	temp = b;
-	ft_putstr("\nb : ");
-	while (temp != NULL)
-	{
-		ft_putnbr(temp->n);
-		temp = temp->next;
-	}
-	ft_putchar('\n');
-}
-
 void	push(t_lst **from, t_lst **to, t_lst **to_tail)
 {
 	t_lst *temp;

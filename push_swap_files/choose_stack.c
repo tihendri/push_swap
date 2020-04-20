@@ -6,13 +6,13 @@
 /*   By: tihendri <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 13:08:16 by tihendri          #+#    #+#             */
-/*   Updated: 2019/11/22 13:08:20 by tihendri         ###   ########.fr       */
+/*   Updated: 2019/12/19 13:08:20 by tihendri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int     count_entries(char **args)
+static int  count_entries(char **args)
 {
     int i;
 
@@ -22,7 +22,7 @@ int     count_entries(char **args)
     return (i);
 }
 
-int     check_one(char **ss)
+static int  check_one(char **ss)
 {
     int i;
 
@@ -36,27 +36,32 @@ int     check_one(char **ss)
     }
     return (1);
 }
-void    choose_stack(t_stack *a, t_stack *b, char **av, int ac)
+void        choose_stack(t_stack *a, t_stack *b, char **av, int ac)
 {
     char    **args;
     long    r;
 
-    if (ac == 2)
+    if (ac == 1)
+        exit(0);
+    else if (ac == 2)
     {
         args = ft_strsplit(av[1], ' ');
-        a->acnt = count_entries(args);
-        if (a->acnt == 1)
+        a->argc_temp = count_entries(args);
+        if (a->argc_temp == 1)
         {
             r = ft_atol(args[0]);
             if (r > 2147483647 || r < -2147483648 || !check_one(args))
+            {
                 ft_putstr("Error\n");
-            exit(1);
+                exit(1);
+            }
+            exit(0);
         }
-        build_stack_str(a, b, args, a->acnt);
+        build_stack_str(a, b, args, a->argc_temp);
     }
     else if (ac > 2)
     {
-        a->acnt = ac;
+        a->argc_temp = ac;
         build_stack(a, b, av, ac);
     }
 }
