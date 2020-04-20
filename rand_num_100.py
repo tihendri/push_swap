@@ -1,8 +1,8 @@
 import random
 # Change nums to run tests of "nums" length
-nums = 500 
+nums = 100
 a = range(1,1000)
-for i in xrange(nums):
+for i in range(nums):
 	b = a[random.randint(0, len(a)-i)]
 	a.remove(b)
-	print b
+	print (b)

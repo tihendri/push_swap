@@ -1,51 +1,110 @@
 #!/bin/bash
 
-#Change Limit for different test size limits!
-LIMIT=5500
+# These tests are designed for after the error management and identity testing of the two programs.
+
+LIMIT_ONE=12
+LIMIT_TWO=900
+LIMIT_THREE=5500
+
+TEST_ONE="Easy-peasy"
+TEST_TWO="Medium"
+TEST_THREE="Hard"
 
 MAX_OPS=0
 MAX_ARG=0
 TOTAL=0
 BOLD=$(tput bold)
-LIGHT_GREEN='\033[1;32m'
+LIGHT_GREEN='\033[0;32m'
 PURPLE='\033[0;35m'
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
-echo "10 Tests Commencing.."
-for i in {1..10}
-do
-	ARG=$(sh GenRandNums.sh)
-	echo "${PURPLE}Trial: $i${NC}"
-	NUM=$(./push_swap $ARG | wc -l) 
+CHECKER_SAYS="Checker says your operations are..."
+SUCCESS="${GREEN}${BOLD}Success!${NC}"
+FAIL="${RED}${BOLD}Fail!${NC}"
+RESULT="${SUCCESS}"
+echo "\n"
+echo "<***************| Push_Swap Simple Test |***************>"
+
+	ARG=$(sh GenRandNums5.sh)
+	echo "${PURPLE}Test: ${BOLD}${TEST_ONE}$i${NC}\n"
+	NUM=$(./push_swap $ARG | wc -l)
 	TOTAL=$(($TOTAL+$NUM))
-	if [ $NUM -gt $MAX_OPS ] 
+	if [ $NUM -gt $MAX_OPS ]
 	then
-		MAX_OPS=$NUM	
+		MAX_OPS=$NUM
 		MAX_ARG=$ARG
 	fi
-	if [ $NUM -gt $LIMIT ] 
+	if [ $NUM -gt $LIMIT_ONE ]
 	then
-		echo "${RED}Your program took $NUM operations; The limit is $LIMIT!${NC}"
-		echo "Here's the Arg: $ARG"
+		RESULT=$FAIL
+		echo "${FAIL}"
+		echo "${RED}Your program took $NUM operations, which exceeded the limit of $LIMIT_ONE!${NC}"
+		echo "Here's the Arguments: $ARG"
+		echo "\n"
 		continue
 	fi	
-	echo "${BOLD}${BLUE}$NUM${NC}"
+	echo "${BLUE}${BOLD}${CHECKER_SAYS}${NC}"
 	RES=$(./push_swap $ARG | ./checker $ARG)
-	if [ "$RES" = "OK" ]
+	echo "\n"
+	echo "Result: ${RESULT}"
+	echo "Number of operations: ${GREEN}${BOLD}${NUM}${NC}"
+	echo "Limit of operations: ${RED}${BOLD}${LIMIT_ONE}${NC}\n"
+	echo "\n"
+
+echo "<***************| Push_Swap Moderate Test |***************>"
+	
+	ARG=$(sh GenRandNums100.sh)
+	echo "${PURPLE}Test: ${BOLD}${TEST_TWO}$i${NC}\n"
+	NUM=$(./push_swap $ARG | wc -l)
+	TOTAL=$(($TOTAL+$NUM))
+	if [ $NUM -gt $MAX_OPS ]
 	then
-		echo ${LIGHT_GREEN}"SUCCESS for Trial $i!${NC}"
-	elif [ "$RES" = "KO" ]
-	then
-		echo ${RED}"FAILURE for Trial $i!${NC}"
-		echo "Here's the Arg: $ARG"
+		MAX_OPS=$NUM
+		MAX_ARG=$ARG
 	fi
-	echo "------------------------------"
-done
-echo "--------------------------------"
-echo "Number of operations: ${GREEN}${NUM}${NC}"
-echo "Limit of operations: ${RED}${LIMIT}${NC}"
-echo "Avg operations: ${PURPLE}$((TOTAL/10))${NC}"
-echo "Score out of 5: ${PURPLE}$((5))${NC}"
+	if [ $NUM -gt $LIMIT_TWO ]
+	then
+		RESULT=$FAIL
+		echo "${FAIL}"
+		echo "${RED}Your program took $NUM operations; The limit is $LIMIT_TWO!${NC}"
+		echo "Here's the Arg: $ARG"
+		echo "\n"
+		continue
+	fi
+	echo "${BLUE}${BOLD}${CHECKER_SAYS}${NC}"
+	RES=$(./push_swap $ARG | ./checker $ARG)
+	echo "\n"
+	echo "Result: ${RESULT}"
+	echo "Number of operations: ${GREEN}${BOLD}${NUM}${NC}"
+	echo "Limit of operations: ${RED}${BOLD}${LIMIT_TWO}${NC}\n"
+	echo "\n"
+
+echo "<***************| Push_Swap Advanced Test |***************>"
+
+	ARG=$(sh GenRandNums500.sh)
+	echo "${PURPLE}Test: ${BOLD}${TEST_THREE}$i${NC}\n"
+	NUM=$(./push_swap $ARG | wc -l)
+	TOTAL=$(($TOTAL+$NUM))
+	if [ $NUM -gt $MAX_OPS ]
+	then
+		MAX_OPS=$NUM
+		MAX_ARG=$ARG
+	fi
+	if [ $NUM -gt $LIMIT_THREE ]
+	then
+		RESULT=$FAIL
+		echo "${FAIL}"
+		echo "${RED}Your program took $NUM operations; The limit is $LIMIT_THREE!${NC}"
+		echo "Here's the Arg: $ARG"
+		echo "\n"
+		continue
+	fi
+	echo "${BLUE}${BOLD}${CHECKER_SAYS}${NC}"
+	RES=$(./push_swap $ARG | ./checker $ARG)
+	echo "\n"
+	echo "Result: ${RESULT}"
+	echo "Number of operations: ${GREEN}${BOLD}${NUM}${NC}"
+	echo "Limit of operations: ${RED}${BOLD}${LIMIT_THREE}${NC}"

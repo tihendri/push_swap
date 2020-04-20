@@ -1,0 +1,1 @@
+python rand_num_500.py | tr '\n' ' ' | awk '{$1=$1};1'
