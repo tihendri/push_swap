@@ -12,6 +12,13 @@
 
 #include "push_swap.h"
 
+/*
+**These are all the allowed commands that will be used to manipulate
+**the positions of the numbers.
+**push is used to send the first number on a stack (either stack A or B)
+**to the first position on the other stack.
+*/
+
 void	push(t_lst **from, t_lst **to, t_lst **to_tail)
 {
 	t_lst *temp;
@@ -31,6 +38,11 @@ void	push(t_lst **from, t_lst **to, t_lst **to_tail)
 	(*to)->prev = NULL;
 }
 
+/*
+**swap is used to switch the places of the first two numbers on a
+**stack so that first becomes second and second now becomes first.
+*/
+
 void	swap(t_lst **head)
 {
 	t_lst *temp;
@@ -45,6 +57,13 @@ void	swap(t_lst **head)
 	(*head)->prev = NULL;
 }
 
+/*
+**rotate is used to send the first number on a stack to the
+**back of the same stack, i.e. first becomes last and second
+**becomes first - meaning all numbers (theoretically) shift
+**one space up.
+*/
+
 void	rotate(t_lst **head, t_lst **tail)
 {
 	if (*head == NULL || *tail == NULL || (*head)->next == NULL)
@@ -56,6 +75,12 @@ void	rotate(t_lst **head, t_lst **tail)
 	*tail = (*tail)->next;
 	(*tail)->next = NULL;
 }
+
+/*
+**reverse rotate does the exact opporsite of rotate, by
+**sending the last number to the front and shift all
+**other numbers one space down.
+*/
 
 void	rev_rotate(t_lst **head, t_lst **tail)
 {

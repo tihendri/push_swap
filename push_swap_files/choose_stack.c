@@ -12,6 +12,10 @@
 
 #include "push_swap.h"
 
+/*
+**count_entries is used to count the amount of arguments parsed.
+*/
+
 static int  count_entries(char **args)
 {
     int i;
@@ -22,7 +26,13 @@ static int  count_entries(char **args)
     return (i);
 }
 
-static int  check_one(char **ss)
+/*
+**check_one_arg is used to check if the string argument parsed
+**is just one number in, which case it's sorted.
+**used in choose_stack function. 
+*/
+
+static int  check_one_arg(char **ss)
 {
     int i;
 
@@ -36,6 +46,13 @@ static int  check_one(char **ss)
     }
     return (1);
 }
+
+/*
+**choose_stack is used to actually pick, after some validation, which
+**stack building function to use, as I have to account for string and
+**integer arguments.
+*/
+
 void        choose_stack(t_stack *a, t_stack *b, char **av, int ac)
 {
     char    **args;
@@ -50,7 +67,7 @@ void        choose_stack(t_stack *a, t_stack *b, char **av, int ac)
         if (a->argc_temp == 1)
         {
             r = ft_atol(args[0]);
-            if (r > 2147483647 || r < -2147483648 || !check_one(args))
+            if (r > 2147483647 || r < -2147483648 || !check_one_arg(args))
             {
                 ft_putstr("Error\n");
                 exit(1);
