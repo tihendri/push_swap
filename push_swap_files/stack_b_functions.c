@@ -12,35 +12,6 @@
 
 #include "push_swap.h"
 
-long		special_median_b(t_stack *b)
-{
-	t_lst	*temp;
-	int		arr[7];
-	int		i;
-	int		j[2];
-
-	temp = b->head;
-	i = 0;
-	while (temp != b->p[b->start])
-	{
-		arr[i++] = temp->value;
-		temp = temp->next;
-	}
-	j[0] = -1;
-	while (j[0]++ < i)
-	{
-		j[1] = j[0];
-		while (++j[1] < i)
-			if (arr[j[0]] > arr[j[1]])
-			{
-				arr[6] = arr[j[1]];
-				arr[j[1]] = arr[j[0]];
-				arr[j[0]] = arr[6];
-			}
-	}
-	return ((!b->p[b->start]) ? arr[2] : arr[1]);
-}
-
 /*
 **This function will check the values on the stack:
 **if the number is smaller than the median, rotate it to the back
@@ -59,12 +30,12 @@ static int	smaller_than_median(t_stack *b, char *com, int med, int count[2])
 
 	skips = 0;
 	temp = b->head;
-	while (temp != b->p[b->start] && temp->value <= med)
+	while (temp != b->sub_lst[b->start] && temp->value <= med)
 	{
 		skips++;
 		temp = temp->next;
 	}
-	if (temp == b->p[b->start])
+	if (temp == b->sub_lst[b->start])
 		return (0);
 	count[0] += skips;
 	while (skips--)
@@ -81,26 +52,26 @@ static int	smaller_than_median(t_stack *b, char *com, int med, int count[2])
 **is higher than the median
 */
 
-void		work_stack_b(t_stack *a, t_stack *b, int med, char *com)
+void		work_stack_b(t_stack *a, t_stack *b, int median, char *command)
 {
 	int		count[2];
 
 	count[0] = 0;
 	count[1] = 0;
-	while (b->head != b->p[b->start])
+	while (b->head != b->sub_lst[b->start])
 	{
-		if (b->head->value > med)
+		if (b->head->value > median)
 		{
 			push(&b->head, &a->head, &a->tail);
-			ft_strcat(com, "pa\n");
+			ft_strcat(command, "pa\n");
 		}
-		else if (!(smaller_than_median(b, com, med, count)))
+		else if (!(smaller_than_median(b, command, median, count)))
 			break ;
 	}
-	while (b->p[b->start] && --count[0] >= 0)
+	while (b->sub_lst[b->start] && --count[0] >= 0)
 	{
 		rev_rotate(&b->head, &b->tail);
-		ft_strcat(com, "rrb\n");
+		ft_strcat(command, "rrb\n");
 	}
 }
 
@@ -110,36 +81,47 @@ void		work_stack_b(t_stack *a, t_stack *b, int med, char *com)
 **this function sorts those three values in descending order.
 */
 
-static void	last_three_numbers_stack_b(t_stack *a, char *temp)
+static void	operations_stack_b(t_stack *a, t_stack *b, char *command)
 {
-	while (!(a->head->next->value > a->head->next->next->value
-	&& a->head->value > a->head->next->next->value))
+	if (b->head->value > a->head->value)
 	{
-		if (a->head->next->value < a->head->next->next->value
-		&& a->head->next->value < a->head->value)
+		while (!(b->head->next->value > b->head->next->next->value
+				&& b->head->value > b->head->next->next->value))
 		{
-			rev_rotate(&a->head, &a->tail);
-			ft_strcat(temp, "rrb\n");
+			if (b->head->next->value < b->head->next->next->value
+				&& b->head->next->value < b->head->value)
+			{
+				rev_rotate(&b->head, &b->tail);
+				ft_strcat(command, "rrb\n");
+			}
+			else
+			{
+				rotate(&b->head, &b->tail);
+				ft_strcat(command, "rb\n");
+			}
 		}
-		else
+		if (b->head->next->value > b->head->value)
 		{
-			rotate(&a->head, &a->tail);
-			ft_strcat(temp, "rb\n");
+			if (a->head->next->value < a->head->value)
+			{
+				swap(&a->head);
+				swap(&b->head);
+				ft_strcat(command, "ss\n");
+			}
+			else
+			{
+				swap(&b->head);
+				ft_strcat(command, "sb\n");
+			}
 		}
 	}
-	if (!(a->head->next->value > a->head->value))
-		return ;
-	swap(&a->head);
-	ft_strcat(temp, "sb\n");
 }
 
 /*
-**This function will sort/deal with the remaining three numbers
-**after all the operations have been performed on the smaller
-**numbers.
+**This function will execute moves on stack B.
 */
 
-void		sort_stack_b_last_three(t_stack *b, int count, char *temp)
+void		moves_on_stack_b(t_stack *a, t_stack *b, int count, char *command)
 {
 	if (b->start)
 		b->start--;
@@ -149,10 +131,19 @@ void		sort_stack_b_last_three(t_stack *b, int count, char *temp)
 	{
 		if (b->head->next && b->head->next->value > b->head->value)
 		{
-			swap(&b->head);
-			ft_strcat(temp, "sb\n");
+			if (a->head && a->head->next && (a->head->next->value < a->head->value))
+			{
+				swap(&a->head);
+				swap(&b->head);
+				ft_strcat(command, "ss\n");
+			}
+			else
+			{
+				swap(&b->head);
+				ft_strcat(command, "sb\n");
+			}
 		}
 		return ;
 	}
-	last_three_numbers_stack_b(b, temp);
+	operations_stack_b(a, b, command);
 }
