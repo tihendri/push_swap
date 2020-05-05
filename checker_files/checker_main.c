@@ -20,14 +20,12 @@ int			main(int ac, char **av)
 		return (0);
 	all = initialize_struct();
 	populate_stack(ac, av, all);
-	if (ac == 3 && (ft_strequ(av[2], "-v") ||
-		ft_strequ(av[2], "-c")))
+	if (ac == 3 && (ft_strequ(av[2], "-v") || ft_strequ(av[2], "-c")))
 		print_stacks_bonus(all, av);
 	while (get_next_line(0, &all->line))
 	{
 		exec_moves(all, all->line);
-		if (ac == 3 && (ft_strequ(av[2], "-v") ||
-			ft_strequ(av[2], "-c")))
+		if (ac == 3 && (ft_strequ(av[2], "-v") || ft_strequ(av[2], "-c")))
 			print_stacks_bonus(all, av);
 		if (all->line)
 			ft_strdel(&all->line);
