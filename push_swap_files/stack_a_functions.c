@@ -13,43 +13,6 @@
 #include "push_swap.h"
 
 /*
-**This function is used to get the median of the stack when there's fewer
-**arguments.
-**This heps with effieciency by lowering the amount of moves made when
-**the arguments are fewer.
-**This function is specifically created for the evaluation of this project.
-*/
-
-long		low_args_median_a(t_stack *a)
-{
-	t_lst	*temp;
-	int		arr[12];
-	int		i;
-	int		j[2];
-
-	temp = a->head;
-	i = 0;
-	while (temp != a->p[a->start])
-	{
-		arr[i++] = temp->value;
-		temp = temp->next;
-	}
-	j[0] = -1;
-	while (j[0]++ < i)
-	{
-		j[1] = j[0];
-		while (++j[1] < i)
-			if (arr[j[0]] < arr[j[1]])
-			{
-				arr[11] = arr[j[1]];
-				arr[j[1]] = arr[j[0]];
-				arr[j[0]] = arr[11];
-			}
-	}
-	return ((!a->p[a->start]) ? arr[3] : arr[2]);
-}
-
-/*
 **This function will check the values on the stack:
 **if the number is larger than the median, rotate it to the back
 **of the stack.
@@ -59,21 +22,21 @@ long		low_args_median_a(t_stack *a)
 **function in stack_b_functions.c file
 */
 
-static int	over_median(t_stack *a, char *command, int median, int *t_rewind)
+static int	over_median(t_stack *a, char *command, int median, int *places)
 {
 	t_lst	*temp;
 	int		counter;
 
 	temp = a->head;
 	counter = 0;
-	while (temp != a->p[a->start] && temp->value > median)
+	while (temp != a->sub_lst[a->start] && temp->value > median)
 	{
 		counter++;
 		temp = temp->next;
 	}
-	if (temp == a->p[a->start])
+	if (temp == a->sub_lst[a->start])
 		return (0);
-	*t_rewind = *t_rewind + counter;
+	*places = *places + counter;
 	while (counter--)
 	{
 		rotate(&a->head, &a->tail);
@@ -90,22 +53,22 @@ static int	over_median(t_stack *a, char *command, int median, int *t_rewind)
 
 void		work_stack_a(t_stack *a, t_stack *b, int median, char *command)
 {
-	int		rewind;
+	int		places_moved;
 
-	rewind = 0;
+	places_moved = 0;
 	if (b->head)
-		b->p[++(b->start)] = b->head;
-	while (a->head != a->p[a->start])
+		b->sub_lst[++(b->start)] = b->head;
+	while (a->head != a->sub_lst[a->start])
 	{
 		if (a->head->value <= median)
 		{
 			push(&a->head, &b->head, &b->tail);
 			ft_strcat(command, "pb\n");
 		}
-		else if (!(over_median(a, command, median, &rewind)))
+		else if (!(over_median(a, command, median, &places_moved)))
 			break ;
 	}
-	while (a->p[a->start] && --rewind >= 0)
+	while (a->sub_lst[a->start] && --places_moved >= 0)
 	{
 		rev_rotate(&a->head, &a->tail);
 		ft_strcat(command, "rra\n");
@@ -115,39 +78,38 @@ void		work_stack_a(t_stack *a, t_stack *b, int median, char *command)
 /*
 **After all operations pushing to stack B,
 **the three highest values are left behind on stack A,
-**this function sorts those three values. 
+**this function sorts those three values.
 */
 
-static void	last_three_numbers_stack_a(t_stack *a, char *temp)
+static void	operations_stack_a(t_stack *a, char *command)
 {
 	while (!(a->head->next->value < a->head->next->next->value
-	&& a->head->value < a->head->next->next->value))
+			&& a->head->value < a->head->next->next->value))
 	{
 		if (a->head->next->value > a->head->next->next->value
-		&& a->head->next->value > a->head->value)
+			&& a->head->next->value > a->head->value)
 		{
 			rev_rotate(&a->head, &a->tail);
-			ft_strcat(temp, "rra\n");
+			ft_strcat(command, "rra\n");
 		}
 		else
 		{
 			rotate(&a->head, &a->tail);
-			ft_strcat(temp, "ra\n");
+			ft_strcat(command, "ra\n");
 		}
 	}
 	if (!(a->head->next->value < a->head->value))
 		return ;
 	swap(&a->head);
-	ft_strcat(temp, "sa\n");
+	ft_strcat(command, "sa\n");
 }
 
 /*
-**This function will sort/deal with the remaining three numbers
-**after all the operations have been performed on the smaller
-**numbers.
+**This function is respomsible for executing the required move
+**on stack A.
 */
 
-void		sort_stack_a_last_three(t_stack *a, int count, char *temp)
+void		moves_on_stack_a(t_stack *a, t_stack *b, int count, char *command)
 {
 	if (count == 1)
 		return ;
@@ -155,10 +117,19 @@ void		sort_stack_a_last_three(t_stack *a, int count, char *temp)
 	{
 		if (a->head->next->value < a->head->value)
 		{
-			swap(&a->head);
-			ft_strcat(temp, "sa\n");
+			if (b->head && b->head->next && (b->head->next->value > b->head->value))
+			{
+				swap(&a->head);
+				swap(&b->head);
+				ft_strcat(command, "ss\n");
+			}
+			else
+			{
+				swap(&a->head);
+				ft_strcat(command, "sa\n");
+			}
 		}
 		return ;
 	}
-	last_three_numbers_stack_a(a, temp);
+	operations_stack_a(a, command);
 }
