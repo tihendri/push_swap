@@ -3,7 +3,7 @@
 # These tests are designed for after the error management and identity testing of the two programs.
 
 LIMIT_ONE=12
-LIMIT_TWO=900
+LIMIT_TWO=700
 LIMIT_THREE=5500
 
 TEST_ONE="Easy-peasy"
@@ -42,20 +42,22 @@ echo "<***************| Push_Swap Simple Test |***************>"
 		RESULT=$FAIL
 		echo "${FAIL}"
 		echo "${RED}Your program took $NUM operations, which exceeded the limit of $LIMIT_ONE!${NC}"
-		echo "Here's the Arguments: $ARG"
+		echo "${PURPLE}Here's the numbers: ${NC}"
+		echo "$ARG"
 		echo "\n"
 		continue
 	fi	
 	echo "${BLUE}${BOLD}${CHECKER_SAYS}${NC}"
 	RES=$(./push_swap $ARG | ./checker $ARG)
 	echo "\n"
-	echo "Result: ${RESULT}"
 	echo "Number of operations: ${GREEN}${BOLD}${NUM}${NC}"
 	echo "Limit of operations: ${RED}${BOLD}${LIMIT_ONE}${NC}\n"
+	echo "Result: ${RESULT}"
 	echo "\n"
 
 echo "<***************| Push_Swap Moderate Test |***************>"
 	
+	RESULT="${SUCCESS}"
 	ARG=$(sh GenRandNums100.sh)
 	echo "${PURPLE}Test: ${BOLD}${TEST_TWO}$i${NC}\n"
 	NUM=$(./push_swap $ARG | wc -l)
@@ -70,20 +72,22 @@ echo "<***************| Push_Swap Moderate Test |***************>"
 		RESULT=$FAIL
 		echo "${FAIL}"
 		echo "${RED}Your program took $NUM operations; The limit is $LIMIT_TWO!${NC}"
-		echo "Here's the Arg: $ARG"
+		echo "${PURPLE}Here's the numbers: ${NC}"
+		echo "$ARG"
 		echo "\n"
 		continue
 	fi
 	echo "${BLUE}${BOLD}${CHECKER_SAYS}${NC}"
 	RES=$(./push_swap $ARG | ./checker $ARG)
 	echo "\n"
-	echo "Result: ${RESULT}"
 	echo "Number of operations: ${GREEN}${BOLD}${NUM}${NC}"
 	echo "Limit of operations: ${RED}${BOLD}${LIMIT_TWO}${NC}\n"
+	echo "Result: ${RESULT}"
 	echo "\n"
 
 echo "<***************| Push_Swap Advanced Test |***************>"
 
+	RESULT="${SUCCESS}"
 	ARG=$(sh GenRandNums500.sh)
 	echo "${PURPLE}Test: ${BOLD}${TEST_THREE}$i${NC}\n"
 	NUM=$(./push_swap $ARG | wc -l)
@@ -98,13 +102,14 @@ echo "<***************| Push_Swap Advanced Test |***************>"
 		RESULT=$FAIL
 		echo "${FAIL}"
 		echo "${RED}Your program took $NUM operations; The limit is $LIMIT_THREE!${NC}"
-		echo "Here's the Arg: $ARG"
+		echo "${PURPLE}Here's the numbers: ${NC}"
+		echo "$ARG"
 		echo "\n"
 		continue
 	fi
 	echo "${BLUE}${BOLD}${CHECKER_SAYS}${NC}"
 	RES=$(./push_swap $ARG | ./checker $ARG)
 	echo "\n"
-	echo "Result: ${RESULT}"
 	echo "Number of operations: ${GREEN}${BOLD}${NUM}${NC}"
-	echo "Limit of operations: ${RED}${BOLD}${LIMIT_THREE}${NC}"
+	echo "Limit of operations: ${RED}${BOLD}${LIMIT_THREE}${NC}\n"
+	echo "Result: ${RESULT}"
