@@ -43,6 +43,7 @@ static void	visualize_stacks(t_all *all)
 		i_b++;
 	}
 	ft_putstr("\n");
+	ft_putstr("\n");
 }
 
 /*
@@ -59,7 +60,7 @@ static void	visualize_stacks_colour(t_all *all)
 	i_b = 0;
 	ft_putstr("\e[1;33mSIZE A = ");
 	ft_putnbr(all->size_a);
-	ft_putstr(" |\e[1;32mSTACK A = ");
+	ft_putstr("\t|\e[1;32mSTACK A = ");
 	while (i_a < all->size_a)
 	{
 		ft_putnbr(all->int_stack_a[i_a]);
@@ -69,13 +70,14 @@ static void	visualize_stacks_colour(t_all *all)
 	ft_putstr("\e[0m\n");
 	ft_putstr("\e[1;33mSIZE B = ");
 	ft_putnbr(all->size_b);
-	ft_putstr(" |\e[1;31mSTACK B = ");
+	ft_putstr("\t|\e[1;31mSTACK B = ");
 	while (i_b < all->size_b)
 	{
 		ft_putnbr(all->int_stack_b[i_b]);
 		write(1, " ", 1);
 		i_b++;
 	}
+	ft_putstr("\e[0m\n");
 	ft_putstr("\e[0m\n");
 }
 
