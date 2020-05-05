@@ -31,6 +31,9 @@ typedef struct		s_lst
 
 /*
 **Data structure
+**sub_lst is mainly used for the functions involved with the median,
+**so I use that instead of creating a whole new struct for it.
+**It is the 2-dimensional component of this linked-list.
 */
 
 typedef struct		s_stack
@@ -38,7 +41,7 @@ typedef struct		s_stack
 	int				start;
 	int				argc;
 	int				argc_temp;
-	t_lst			**p;
+	t_lst			**sub_lst;
 	t_lst			*head;
 	t_lst			*tail;
 }					t_stack;
@@ -66,30 +69,30 @@ void				rotate(t_lst **head, t_lst **tail);
 void				rev_rotate(t_lst **head, t_lst **tail);
 
 /*
-**from midpoint.c file, gets the median/middle of the input data,
+**from median file, gets the median/middle of the input data,
 **in order to split.
 */
 
-int					get_count(t_stack *s);
-int					real_median(t_stack *a);
+int					get_count(t_stack *stack);
+int					real_median(t_stack *stack);
+long				low_args_median_b(t_stack *b);
+long				low_args_median_a(t_stack *a);
 
 /*
 **from stack_a_functions.c file, contains all the functions that
 **will be applied to stack a.
 */
 
-long				low_args_median_a(t_stack *a);
 void				work_stack_a(t_stack *a, t_stack *b, int median, char *command);
-void				sort_stack_a_last_three(t_stack *a, int count, char *temp);
+void				moves_on_stack_a(t_stack *a, t_stack *b, int count, char *command);
 
 /*
 **from stack_b_functions.c file, contains all the functions that
 **will be applied to stack b.
 */
 
-long				special_median_b(t_stack *b);
-void				work_stack_b(t_stack *a, t_stack *b, int med, char *com);
-void				sort_stack_b_last_three(t_stack *b, int count, char *temp);
+void				work_stack_b(t_stack *a, t_stack *b, int median, char *commmand);
+void				moves_on_stack_b(t_stack *a, t_stack *b, int count, char *command);
 
 /*
 **from algo_solve.c file, contains the functions used to sort the
