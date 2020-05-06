@@ -88,9 +88,9 @@ static void	send_from_stack_b(t_stack *a, t_stack *b, t_list **command)
 	temp[0] = '\0';
 	count = get_count(b);
 	median = NO_MEDIAN;
-	if (count <= 4 && count > 2)
+	if (count <= 6 && count > 2)
 		median = low_args_median_b(b);
-	else if (count > 4)
+	else if (count > 6)
 		median = real_median(b);
 	if (median != NO_MEDIAN)
 		work_stack_b(a, b, (int)median, temp);
