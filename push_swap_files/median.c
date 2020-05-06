@@ -77,7 +77,7 @@ long	low_args_median_a(t_stack *a)
 long	low_args_median_b(t_stack *b)
 {
 	t_lst	*temp;
-	int		arr[5];
+	int		arr[7];
 	int		i;
 	int		j[2];
 
@@ -95,9 +95,9 @@ long	low_args_median_b(t_stack *b)
 		while (++j[1] < i)
 			if (arr[j[0]] > arr[j[1]])
 			{
-				arr[4] = arr[j[1]];
+				arr[6] = arr[j[1]];
 				arr[j[1]] = arr[j[0]];
-				arr[j[0]] = arr[4];
+				arr[j[0]] = arr[6];
 			}
 	}
 	return ((!b->sub_lst[b->start]) ? arr[2] : arr[1]);
