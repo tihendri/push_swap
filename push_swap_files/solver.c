@@ -96,7 +96,7 @@ static void	send_from_stack_b(t_stack *a, t_stack *b, t_list **command)
 		work_stack_b(a, b, (int)median, temp);
 	else
 		moves_on_stack_b(a, b, count, temp);
-	if (median == NO_MEDIAN && a->head->value > b->head->value)
+	if (median == NO_MEDIAN)
 		push_from_b(b, a, count, temp);
 	if (temp[0])
 		ft_lstaddtail(command, ft_lstnew_str(temp));
