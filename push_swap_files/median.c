@@ -19,7 +19,7 @@ int		get_count(t_stack *stack)
 
 	temp = stack->head;
 	count = 0;
-	while (temp != stack->sub_lst[stack->start] && count < 10)
+	while (temp != stack->sub_lst[stack->start] && count < 12)
 	{
 		count++;
 		temp = temp->next;
@@ -77,7 +77,7 @@ long	low_args_median_a(t_stack *a)
 long	low_args_median_b(t_stack *b)
 {
 	t_lst	*temp;
-	int		arr[7];
+	int		arr[8];
 	int		i;
 	int		j[2];
 
@@ -95,9 +95,9 @@ long	low_args_median_b(t_stack *b)
 		while (++j[1] < i)
 			if (arr[j[0]] > arr[j[1]])
 			{
-				arr[6] = arr[j[1]];
+				arr[7] = arr[j[1]];
 				arr[j[1]] = arr[j[0]];
-				arr[j[0]] = arr[6];
+				arr[j[0]] = arr[7];
 			}
 	}
 	return ((!b->sub_lst[b->start]) ? arr[2] : arr[1]);
@@ -107,6 +107,7 @@ long	low_args_median_b(t_stack *b)
 **Finds the actual median of the number set, in the stack.
 **This is the original median-finding function used in my
 **algorithm.
+**To find the median, numbers have to be sorted. Hence, the sub_lst.
 */
 
 int		real_median(t_stack *stack)
