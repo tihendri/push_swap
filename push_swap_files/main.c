@@ -15,10 +15,10 @@
 /*
 **t_list structure is in libft.h file, while t_lst is in push_swap.h file
 */
-void	free_all(t_stack *a, t_list *command)
+void	free_all_lists(t_stack *a, t_stack *b, t_list *command)
 {
 	t_lst	*temp;
-	t_list	*temp_a;
+	t_list	*temp_list;
 
 	while (a->head)
 	{
@@ -28,12 +28,13 @@ void	free_all(t_stack *a, t_list *command)
 	}
 	while (command)
 	{
-		temp_a = command;
+		temp_list = command;
 		free(command->content);
 		command = command->next;
-		free(temp_a);
+		free(temp_list);
 	}
 	free(a->sub_lst);
+	free(b->sub_lst);
 }
 
 int		main(int ac, char **av)
@@ -58,7 +59,6 @@ int		main(int ac, char **av)
 		ft_putstr((char *)command->content);
 		command = command->next;
 	}
-	free(b.sub_lst);
-	free_all(&a, command);
+	free_all_lists(&a, &b, command);
 	return (0);
 }
