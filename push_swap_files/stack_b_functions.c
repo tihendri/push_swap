@@ -131,7 +131,7 @@ void		moves_on_stack_b(t_stack *a, t_stack *b, int count, char *command)
 	{
 		if (b->head->next && b->head->next->value > b->head->value)
 		{
-			if (a->head && a->head->next && (a->head->next->value < a->head->value))
+			if (a->head->next && (a->head->next->value < a->head->value))
 			{
 				swap(&a->head);
 				swap(&b->head);
