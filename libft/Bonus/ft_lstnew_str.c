@@ -37,6 +37,5 @@ t_list		*ft_lstnew_str(char *content)
 	arr[i] = '\0';
 	temp->content = (void *)arr;
 	temp->next = NULL;
-	free(arr);
 	return (temp);
 }
