@@ -31,7 +31,8 @@ CH_SRC	= checker_files/check_sorted.c \
 		  checker_files/ft_array_func.c \
 		  checker_files/initialize_struct.c \
 		  checker_files/all_moves.c \
-		  checker_files/visualize.c
+		  checker_files/visualize.c \
+		  checker_files/free_all.c
 
 CFLAGS	= -Wall -Wextra -Werror
 
