@@ -13,6 +13,8 @@
 #ifndef CHECKER_H
 # define CHECKER_H
 # define MAXINT 2147483648
+# define TOKEN_STR 0
+# define TOKEN_INT 1
 
 # include "../libft/libft.h"
 # include <stdlib.h>
@@ -27,6 +29,7 @@ typedef struct		s_all
 	unsigned int	size;
 	unsigned int	size_a;
 	unsigned int	size_b;
+	unsigned int	token;
 }					t_all;
 
 /*
@@ -94,5 +97,5 @@ void				put_ok_ko(t_all *all);
 */
 void				print_stacks_bonus(t_all *all, char **av);
 
-// void				free_all(t_all *all); //Not being used rn, might be causing double free
+void				free_all(t_all *all);
 #endif
