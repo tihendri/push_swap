@@ -70,9 +70,11 @@ void        choose_stack(t_stack *a, t_stack *b, char **av, int ac)
             if (r > 2147483647 || r < -2147483648 || !check_one_arg(args))
             {
                 ft_putstr("Error\n");
-                free(args);
+                free(*args);
+                
                 exit(1);
             }
+            free(*args);
             exit(0);
         }
         build_stack_str(a, b, args, a->argc_temp);
