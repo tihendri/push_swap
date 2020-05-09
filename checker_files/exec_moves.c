@@ -31,7 +31,10 @@ static void	more_moves(t_all *all, char *line)
 	else if (!ft_strcmp(line, "rrr"))
 		rrr(all);
 	else
+	{
+		free_all(all);
 		ft_puterror_exit();
+	}
 }
 
 void		exec_moves(t_all *all, char *line)
