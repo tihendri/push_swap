@@ -31,5 +31,6 @@ t_all	*initialize_struct(void)
 	all->size = 0;
 	all->size_a = 0;
 	all->size_b = 0;
+	all->token = 0;
 	return (all);
 }
