@@ -29,6 +29,6 @@ int			main(int ac, char **av)
 			ft_strdel(&all->line);
 	}
 	put_ok_ko(all);
-	free(all);
+	free_all(all);
 	return (0);
 }
