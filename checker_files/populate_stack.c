@@ -23,15 +23,18 @@
 static void	fill_stack(t_all *all)
 {
 	unsigned int i;
+	unsigned int j;
 
 	i = 0;
+	j = 0;
 	all->int_stack_a = (unsigned int *)malloc(sizeof(int ) * all->size);
 	all->int_stack_b = (unsigned int *)malloc(sizeof(int ) * all->size);
 	while (i < all->size)
 	{
 		all->int_stack_a[i] = ft_atoi(all->args[i]);
-		all->int_stack_b++;
+		all->int_stack_b[j] = 0;
 		i++;
+		j++;
 	}
 }
 
@@ -49,11 +52,13 @@ void		populate_stack(int ac, char **av, t_all *all)
 	if (ac == 2 || (ac == 3 && ft_strequ(av[2], "-v")) ||
 		(ac == 3 && ft_strequ(av[2], "-c")))
 	{
+		all->token = TOKEN_STR;
 		all->args = ft_strsplit(av[1], ' ');
 		error_check(all);
 	}
 	else
 	{
+		all->token = TOKEN_INT;
 		all->args = av + 1;
 		error_check(all);
 	}
