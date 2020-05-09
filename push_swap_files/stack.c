@@ -54,12 +54,83 @@ static int	check_only_number(int ac, char **av, t_stack *a)
 }
 
 /*
+**frees stack a before exit to resolve memory
+**vulnerability.
+*/
+static void free_will_stack_ints(t_stack *a)
+{
+	t_lst	*temp;
+
+	while (a->head)
+	{
+		temp = a->head;
+		a->head = a->head->next;
+		free(temp);
+	}
+	error();
+}
+
+// static void free_will_stack_str(t_stack *a, char **args)
+// {
+// 	t_lst	*temp;
+// 	int		i;
+
+// 	i = 0;
+// 	while (a->head)
+// 	{
+// 		temp = a->head;
+// 		a->head = a->head->next;
+// 		free(temp);
+// 	}
+// 	while (args[i])
+// 		free(args[i++]);
+// 	error();
+// }
+
+// static void free_will_av(char **av)
+// {
+// 	int		i;
+
+// 	i = 0;
+// 	while (av[i])
+// 		free(av[i++]);
+// 	error();
+// }
+
+/*
 **Evaluates input to check whether a value has been entered
 **multiple times.
 **Returns incomplete if there are doubles (return (1)).
 */
 
-static int	check_doubles(t_stack *a, int ac)
+// static void	check_doubles_str(t_stack *a, char **args, int ac)
+// {
+// 	t_lst	*temp;
+// 	int		i;
+// 	int		j;
+// 	int		k;
+// 	int		arr[ac + 1];
+
+// 	temp = a->head;
+// 	if (temp->next == NULL)
+// 		return ;
+// 	i = 0;
+// 	while (temp)
+// 	{
+// 		arr[i++] = temp->value;
+// 		temp = temp->next;
+// 	}
+// 	j = -1;
+// 	while (j++ < i)
+// 	{
+// 		k = j;
+// 		while (++k < i)
+// 			if (arr[j] == arr[k])
+// 				free_will_stack_str(a, args);
+// 	}
+// }
+
+static void	check_doubles_ints(t_stack *a, int ac)
 {
 	t_lst	*temp;
 	int		i;
@@ -69,7 +140,7 @@ static int	check_doubles(t_stack *a, int ac)
 
 	temp = a->head;
 	if (temp->next == NULL)
-		return (1);
+		return ;
 	i = 0;
 	while (temp)
 	{
@@ -82,9 +153,8 @@ static int	check_doubles(t_stack *a, int ac)
 		k = j;
 		while (++k < i)
 			if (arr[j] == arr[k])
-				return (0);
+				free_will_stack_ints(a);
 	}
-	return (1);
 }
 
 /*
@@ -98,16 +168,18 @@ static int	check_doubles(t_stack *a, int ac)
 static void	lst_addtail_fast(char *str, t_lst **back, t_lst *holder)
 {
 	t_lst	*temp;
-	long	num;
+	int		num;
 
-	num = ft_atol(str);
-	if (num > 2147483647 || num < -2147483648)
-		error();
+	num = ft_atoi(str);
+	// if (num > 2147483647 || num < -2147483648)
+	// 	return ;
+	// if (ft_is_too_big(num))
+	// 	return ;
 	if (*back == NULL)
 		return ;
 	if (!(temp = malloc(sizeof(t_lst))))
 		error();
-	temp->value = (int)num;
+	temp->value = num;
 	temp->next = NULL;
 	(*back)->next = temp;
 	temp->prev = *back;
@@ -124,7 +196,7 @@ static void	lst_addtail_fast(char *str, t_lst **back, t_lst *holder)
 void		build_stack(t_stack *a, t_stack *b, char **av, int ac)
 {
 	int		i;
-	t_lst	*temp;
+	// t_lst	*temp;
 	t_lst	*holder;
 
 	i = 1;
@@ -135,17 +207,22 @@ void		build_stack(t_stack *a, t_stack *b, char **av, int ac)
 	a->head->prev = NULL;
 	a->tail = a->head;
 	while (i < ac)
-		lst_addtail_fast(av[i++], &a->tail, holder);
-	if (!check_doubles(a, ac))
 	{
-		while (a->head)
-		{
-			temp = a->head;
-			a->head = a->head->next;
-			free(temp);
-		}
-		error();
+		if (ft_atol(av[i]) > 2147483647 || ft_atol(av[i]) < -2147483648)
+			free_will_stack_ints(a);
+		lst_addtail_fast(av[i++], &a->tail, holder);
 	}
+	check_doubles_ints(a, ac);
+	// if (!check_doubles(a, ac))
+	// {
+	// 	while (a->head)
+	// 	{
+	// 		temp = a->head;
+	// 		a->head = a->head->next;
+	// 		free(temp);
+	// 	}
+	// 	error();
+	// }
 	b->head = NULL;
 	b->tail = NULL;
 }
@@ -154,31 +231,40 @@ void		build_stack(t_stack *a, t_stack *b, char **av, int ac)
 **For string argument.
 */
 
-void		build_stack_str(t_stack *a, t_stack *b, char **av, int ac)
+void		build_stack_str(t_stack *a, t_stack *b, char **args, int ac)
 {
 	int		i;
-	t_lst	*temp;
+	// t_lst	*temp;
 	t_lst	*holder;
 
-	i = 0;
+	i = 1;
 	holder = NULL;
-	if (!check_only_number(ac, av, a) || !(a->head = malloc(sizeof(t_lst))))
+	if (!check_only_number(ac, args, a) || !(a->head = malloc(sizeof(t_lst))))
 		error();
-	a->head->value = ft_atoi(av[i++]);
+	a->head->value = ft_atoi(args[i++]);
 	a->head->prev = NULL;
 	a->tail = a->head;
 	while (i < ac)
-		lst_addtail_fast(av[i++], &a->tail, holder);
-	if (!check_doubles(a, ac))
 	{
-		while (a->head)
+		if (ft_atol(args[i]) > 2147483647 || ft_atol(args[i]) < -2147483648)
 		{
-			temp = a->head;
-			a->head = a->head->next;
-			free(temp);
+			free(*args);
+			free_will_stack_ints(a);
 		}
-		error();
+		lst_addtail_fast(args[i++], &a->tail, holder);
 	}
+	check_doubles_ints(a, ac);
+	// check_big_small_int(a, ac);
+	// if (!check_doubles(a, ac))
+	// {
+	// 	while (a->head)
+	// 	{
+	// 		temp = a->head;
+	// 		a->head = a->head->next;
+	// 		free(temp);
+	// 	}
+	// 	error();
+	// }
 	b->head = NULL;
 	b->tail = NULL;
 }
