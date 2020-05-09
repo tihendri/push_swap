@@ -32,14 +32,14 @@ static int	check_digits(char *s)
 			if (n < 2147483647)
 				n = ft_atoi(&s[i]);
 			else
-				ft_puterror_exit();
+				return (0);
 			if (s[i] != '+' && s[i] != '-' && !ft_isdigit(s[i]))
-				ft_puterror_exit();
+				return (0);
 			i++;
 		}
 	}
 	else
-		ft_puterror_exit();
+		return (0);
 	i = -1;
 	while (++i < (int)ft_strlen(s))
 		if ((s[i] == '+' || s[i] == '-') && !ft_isdigit(s[i + 1]))
@@ -52,7 +52,7 @@ static int	check_digits(char *s)
 **This function checks for duplicate values.
 */
 
-static void	check_duplicates(char **s)
+static int	check_duplicates(char **s)
 {
 	int i;
 	int j;
@@ -68,12 +68,13 @@ static void	check_duplicates(char **s)
 		while (s[j])
 		{
 			if (s[i] == s[j] || ft_atol(s[i]) == ft_atol(s[j]))
-				ft_puterror_exit();
+				return (0);
 			else
 				j++;
 		}
 		i++;
 	}
+	return (1);
 }
 
 /*
@@ -89,10 +90,10 @@ void		error_check(t_all *all)
 	i = -1;
 	while (all->args[++i])
 	{
-		check_duplicates(all->args);
-		if (!check_digits(all->args[i]))
+		if (!check_duplicates(all->args) || !check_digits(all->args[i]))
 		{
-			ft_array_free(&all->args);
+			if (all->token == TOKEN_STR)
+				ft_array_free(&all->args);
 			free(all);
 			ft_puterror_exit();
 		}
