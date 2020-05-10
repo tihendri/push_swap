@@ -40,8 +40,7 @@ PART2	= Part_2/ft_memalloc.c Part_2/ft_memdel.c Part_2/ft_strnew.c \
 		  Part_2/ft_putstr_fd.c Part_2/ft_putendl_fd.c Part_2/ft_putnbr_fd.c
 
 BONUS	= Bonus/ft_lstadd.c Bonus/ft_lstnew.c Bonus/ft_lstdelone.c \
-		  Bonus/ft_lstdel.c Bonus/ft_lstiter.c Bonus/ft_lstmap.c \
-		  Bonus/ft_lstaddtail.c Bonus/ft_lstnew_str.c
+		  Bonus/ft_lstdel.c Bonus/ft_lstiter.c Bonus/ft_lstmap.c
 
 EXTRA	= Extra/ft_wordcount.c Extra/ft_strndup.c Extra/ft_realloc.c \
 		  Extra/ft_count_letters.c Extra/ft_iswhitespace.c \
