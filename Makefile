@@ -20,7 +20,10 @@ PS_SRC	= push_swap_files/solver.c \
 		  push_swap_files/stack.c \
 		  push_swap_files/stack_a_functions.c \
 		  push_swap_files/stack_b_functions.c \
-		  push_swap_files/choose_stack.c
+		  push_swap_files/choose_stack.c \
+		  push_swap_files/free_functions.c \
+		  push_swap_files/ft_lstaddtail.c \
+		  push_swap_files/ft_lstnew_str.c
 
 CH_SRC	= checker_files/check_sorted.c \
 		  checker_files/exec_moves.c \
