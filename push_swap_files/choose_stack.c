@@ -32,7 +32,7 @@ static int  count_entries(char **args)
 **used in choose_stack function. 
 */
 
-static int  check_one_arg(char **ss)
+static int  check_arg_val(char **ss)
 {
     int i;
 
@@ -53,12 +53,23 @@ static int  check_one_arg(char **ss)
 **integer arguments.
 */
 
+static void check_num_size(long l, char **args, int ac_temp)
+{
+    if (l > 2147483647 || l < -2147483648 || !check_arg_val(args))
+    {
+        ft_putstr("Error\n");
+        free_str(args, ac_temp);
+        free(args);
+        exit(1);
+    }
+}
+
 void        choose_stack(t_stack *a, t_stack *b, char **av, int ac)
 {
     char    **args;
-    long    r;
+    long    is_long_not_int;
 
-    if (ac == 1)
+    if (ac == 1 || ft_strequ(av[1], ""))
         exit(0);
     else if (ac == 2)
     {
@@ -66,15 +77,10 @@ void        choose_stack(t_stack *a, t_stack *b, char **av, int ac)
         a->argc_temp = count_entries(args);
         if (a->argc_temp == 1)
         {
-            r = ft_atol(args[0]);
-            if (r > 2147483647 || r < -2147483648 || !check_one_arg(args))
-            {
-                ft_putstr("Error\n");
-                free(*args);
-                
-                exit(1);
-            }
-            free(*args);
+            is_long_not_int = ft_atol(args[0]);
+            check_num_size(is_long_not_int, args, a->argc_temp);
+            free_str(args, a->argc_temp);
+            free(args);
             exit(0);
         }
         build_stack_str(a, b, args, a->argc_temp);
