@@ -35,13 +35,13 @@ static int	sorted(t_stack *a)
 **arguments parsed to stack A.
 */
 
-static int	send_from_stack_a(t_stack *a, t_stack *b, t_list **command)
+static int	send_from_stack_a(t_stack *a, t_stack *b)
 {
 	int		count;
 	long	median;
-	char	temp[a->argc * 4];
+	// char	temp[a->argc * 4];
 
-	temp[0] = '\0';
+	// temp[0] = '\0';
 	count = get_count(a);
 	median = NO_MEDIAN;
 	if (count <= 7 && count > 2)
@@ -49,17 +49,17 @@ static int	send_from_stack_a(t_stack *a, t_stack *b, t_list **command)
 	else if (count > 7)
 		median = real_median(a);
 	if (median != NO_MEDIAN)
-		work_stack_a(a, b, (int)median, temp);
+		work_stack_a(a, b, (int)median);
 	else
-		moves_on_stack_a(a, b, count, temp);
-	if (temp[0])
-		ft_lstaddtail(command, ft_lstnew_str(temp));
+		moves_on_stack_a(a, b, count);
+	// if (temp[0])
+	// 	ft_lstaddtail(command, ft_lstnew_str(temp));
 	if (median == NO_MEDIAN)
 		a->sub_lst[++(a->start)] = a->head;
 	return ((median == NO_MEDIAN) ? 1 : 0);
 }
 
-static void	push_from_b(t_stack *b, t_stack *a, int count, char *temp)
+static void	push_from_b(t_stack *b, t_stack *a, int count)
 {
 	int i;
 
@@ -68,7 +68,8 @@ static void	push_from_b(t_stack *b, t_stack *a, int count, char *temp)
 	while (i++ < count)
 	{
 		push(&b->head, &a->head, &a->tail);
-		ft_strcat(temp, "pa\n");
+		// ft_strcat(temp, "pa\n");
+		ft_putstr("pa\n");
 	}
 }
 
@@ -79,13 +80,13 @@ static void	push_from_b(t_stack *b, t_stack *a, int count, char *temp)
 **arguments that are on stack B.
 */
 
-static void	send_from_stack_b(t_stack *a, t_stack *b, t_list **command)
+static void	send_from_stack_b(t_stack *a, t_stack *b)
 {
 	int		count;
 	long	median;
-	char	temp[a->argc * 4];
+	// char	temp[a->argc * 4];
 
-	temp[0] = '\0';
+	// temp[0] = '\0';
 	count = get_count(b);
 	median = NO_MEDIAN;
 	if (count <= 6 && count > 2)
@@ -93,34 +94,37 @@ static void	send_from_stack_b(t_stack *a, t_stack *b, t_list **command)
 	else if (count > 6)
 		median = real_median(b);
 	if (median != NO_MEDIAN)
-		work_stack_b(a, b, (int)median, temp);
+		work_stack_b(a, b, (int)median);
 	else
-		moves_on_stack_b(a, b, count, temp);
+		moves_on_stack_b(a, b, count);
 	if (median == NO_MEDIAN)
-		push_from_b(b, a, count, temp);
-	if (temp[0])
-		ft_lstaddtail(command, ft_lstnew_str(temp));
+		push_from_b(b, a, count);
+	// if (temp[0])
+	// 	ft_lstaddtail(command, ft_lstnew_str(temp));
 }
 
-t_list		*solver(t_stack *a, t_stack *b)
+void		solver(t_stack *a, t_stack *b)
 {
-	t_list	*command;
+	// t_list	*command;
 	int		ret;
 	int		sort;
 
-	command = ft_lstnew((void *)"\0", 1);
+	if (sorted(a) && b->head == NULL)
+	{
+		free_stacks(a, b);
+		exit(0);
+	}
+	// command = ft_lstnew((void *)"\0", 1);
 	while (!(sort = sorted(a)) || b->head != NULL)
 	{
 		if (!sort)
 		{
-			while ((ret = send_from_stack_a(a, b, &command)) == 0)
+			while ((ret = send_from_stack_a(a, b)) == 0)
 				;
-			if (ret == -1)
-				exit(1);
 		}
 		else
 			a->sub_lst[++(a->start)] = a->head;
-		send_from_stack_b(a, b, &command);
+		send_from_stack_b(a, b);
 	}
-	return (command);
+	free_stacks(a, b);
 }
