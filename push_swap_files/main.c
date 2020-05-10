@@ -15,33 +15,12 @@
 /*
 **t_list structure is in libft.h file, while t_lst is in push_swap.h file
 */
-void	free_all_lists(t_stack *a, t_stack *b, t_list *command)
-{
-	t_lst	*temp;
-	t_list	*temp_list;
-
-	while (a->head)
-	{
-		temp = a->head;
-		a->head = a->head->next;
-		free(temp);
-	}
-	while (command)
-	{
-		temp_list = command;
-		free(command->content);
-		command = command->next;
-		free(temp_list);
-	}
-	free(a->sub_lst);
-	free(b->sub_lst);
-}
 
 int		main(int ac, char **av)
 {
 	t_stack	a;
 	t_stack	b;
-	t_list	*command;
+	// t_list	*command;
 
 	choose_stack(&a, &b, av, ac);
 	if (!(a.sub_lst = malloc(sizeof(t_lst*) * a.argc_temp)) ||
@@ -53,12 +32,13 @@ int		main(int ac, char **av)
 	b.start = 0;
 	a.sub_lst[a.start] = NULL;
 	b.sub_lst[a.start] = NULL;
-	command = solver(&a, &b);
-	while (command != NULL)
-	{
-		ft_putstr((char *)command->content);
-		command = command->next;
-	}
-	free_all_lists(&a, &b, command);
+	// command = solver(&a, &b);
+	solver(&a, &b);
+	// while (command != NULL)
+	// {
+	// 	ft_putstr((char *)command->content);
+	// 	command = command->next;
+	// }
+	// free_list(command);
 	return (0);
 }
