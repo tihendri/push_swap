@@ -23,7 +23,7 @@
 **function in stack_a_functions.c file
 */
 
-static int	smaller_than_median(t_stack *b, char *com, int med, int count[2])
+static int	smaller_than_median(t_stack *b, int med, int count[2])
 {
 	int		skips;
 	t_lst	*temp;
@@ -41,7 +41,8 @@ static int	smaller_than_median(t_stack *b, char *com, int med, int count[2])
 	while (skips--)
 	{
 		rotate(&b->head, &b->tail);
-		ft_strcat(com, "rb\n");
+		// ft_strcat(com, "rb\n");
+		ft_putstr("rb\n");
 	}
 	return (1);
 }
@@ -52,7 +53,7 @@ static int	smaller_than_median(t_stack *b, char *com, int med, int count[2])
 **is higher than the median
 */
 
-void		work_stack_b(t_stack *a, t_stack *b, int median, char *command)
+void		work_stack_b(t_stack *a, t_stack *b, int median)
 {
 	int		count[2];
 
@@ -63,15 +64,17 @@ void		work_stack_b(t_stack *a, t_stack *b, int median, char *command)
 		if (b->head->value > median)
 		{
 			push(&b->head, &a->head, &a->tail);
-			ft_strcat(command, "pa\n");
+			// ft_strcat(command, "pa\n");
+			ft_putstr("pa\n");
 		}
-		else if (!(smaller_than_median(b, command, median, count)))
+		else if (!(smaller_than_median(b, median, count)))
 			break ;
 	}
 	while (b->sub_lst[b->start] && --count[0] >= 0)
 	{
 		rev_rotate(&b->head, &b->tail);
-		ft_strcat(command, "rrb\n");
+		// ft_strcat(command, "rrb\n");
+		ft_putstr("rrb\n");
 	}
 }
 
@@ -81,7 +84,7 @@ void		work_stack_b(t_stack *a, t_stack *b, int median, char *command)
 **this function sorts those three values in descending order.
 */
 
-static void	operations_stack_b(t_stack *a, t_stack *b, char *command)
+static void	operations_stack_b(t_stack *a, t_stack *b)
 {
 	if (b->head->value > a->head->value)
 	{
@@ -92,12 +95,14 @@ static void	operations_stack_b(t_stack *a, t_stack *b, char *command)
 				&& b->head->next->value < b->head->value)
 			{
 				rev_rotate(&b->head, &b->tail);
-				ft_strcat(command, "rrb\n");
+				// ft_strcat(command, "rrb\n");
+				ft_putstr("rrb\n");
 			}
 			else
 			{
 				rotate(&b->head, &b->tail);
-				ft_strcat(command, "rb\n");
+				// ft_strcat(command, "rb\n");
+				ft_putstr("rb\n");
 			}
 		}
 		if (b->head->next->value > b->head->value)
@@ -106,12 +111,14 @@ static void	operations_stack_b(t_stack *a, t_stack *b, char *command)
 			{
 				swap(&a->head);
 				swap(&b->head);
-				ft_strcat(command, "ss\n");
+				// ft_strcat(command, "ss\n");
+				ft_putstr("ss\n");
 			}
 			else
 			{
 				swap(&b->head);
-				ft_strcat(command, "sb\n");
+				// ft_strcat(command, "sb\n");
+				ft_putstr("sb\n");
 			}
 		}
 	}
@@ -121,7 +128,7 @@ static void	operations_stack_b(t_stack *a, t_stack *b, char *command)
 **This function will execute moves on stack B.
 */
 
-void		moves_on_stack_b(t_stack *a, t_stack *b, int count, char *command)
+void		moves_on_stack_b(t_stack *a, t_stack *b, int count)
 {
 	if (b->start)
 		b->start--;
@@ -135,15 +142,17 @@ void		moves_on_stack_b(t_stack *a, t_stack *b, int count, char *command)
 			{
 				swap(&a->head);
 				swap(&b->head);
-				ft_strcat(command, "ss\n");
+				// ft_strcat(command, "ss\n");
+				ft_putstr("ss\n");
 			}
 			else
 			{
 				swap(&b->head);
-				ft_strcat(command, "sb\n");
+				// ft_strcat(command, "sb\n");
+				ft_putstr("sb\n");
 			}
 		}
 		return ;
 	}
-	operations_stack_b(a, b, command);
+	operations_stack_b(a, b);
 }
