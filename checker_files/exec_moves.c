@@ -33,6 +33,7 @@ static void	more_moves(t_all *all, char *line)
 	else
 	{
 		free_all(all);
+		ft_strdel(&line);
 		ft_puterror_exit();
 	}
 }
