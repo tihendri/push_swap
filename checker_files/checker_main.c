@@ -16,7 +16,7 @@ int			main(int ac, char **av)
 {
 	t_all	*all;
 
-	if (ac < 2)
+	if (ac < 2 || ft_strequ(av[1], ""))
 		return (0);
 	all = initialize_struct();
 	populate_stack(ac, av, all);
