@@ -46,6 +46,12 @@ typedef struct		s_stack
 	t_lst			*tail;
 }					t_stack;
 
+void				free_stacks(t_stack *a, t_stack *b);
+void				free_list(t_list *command);
+void				ft_lstaddtail(t_list **alst, t_list *new);
+t_list				*ft_lstnew_str(char *content);
+void		        free_str(char **args, int ac_temp);
+
 /*
 **from the choose_stack.c file
 */
@@ -83,22 +89,22 @@ long				low_args_median_a(t_stack *a);
 **will be applied to stack a.
 */
 
-void				work_stack_a(t_stack *a, t_stack *b, int median, char *command);
-void				moves_on_stack_a(t_stack *a, t_stack *b, int count, char *command);
+void				work_stack_a(t_stack *a, t_stack *b, int median);
+void				moves_on_stack_a(t_stack *a, t_stack *b, int count);
 
 /*
 **from stack_b_functions.c file, contains all the functions that
 **will be applied to stack b.
 */
 
-void				work_stack_b(t_stack *a, t_stack *b, int median, char *commmand);
-void				moves_on_stack_b(t_stack *a, t_stack *b, int count, char *command);
+void				work_stack_b(t_stack *a, t_stack *b, int median);
+void				moves_on_stack_b(t_stack *a, t_stack *b, int count);
 
 /*
 **from algo_solve.c file, contains the functions used to sort the
 **arrays.
 */
 
-t_list				*solver(t_stack *a, t_stack *b);
+void				solver(t_stack *a, t_stack *b);
 
 #endif
