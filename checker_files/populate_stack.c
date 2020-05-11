@@ -27,12 +27,16 @@ static void	fill_stack(t_all *all)
 
 	i = 0;
 	j = 0;
-	all->int_stack_a = (unsigned int *)malloc(sizeof(int ) * all->size);
-	all->int_stack_b = (unsigned int *)malloc(sizeof(int ) * all->size);
+	if (!(all->int_stack_a = (int *)malloc(sizeof(int ) * all->size)) ||
+		!(all->int_stack_b = (int *)malloc(sizeof(int ) * all->size)))
+	{
+		free_all(all);
+		exit(EXIT_FAILURE);
+	}
 	while (i < all->size)
 	{
 		all->int_stack_a[i] = ft_atoi(all->args[i]);
-		all->int_stack_b[j] = 0;
+		all->int_stack_b++;
 		i++;
 		j++;
 	}
