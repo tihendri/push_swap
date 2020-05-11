@@ -31,7 +31,7 @@ void	ft_puterror_exit(void)
 void		put_ok_ko(t_all *all)
 {
 	if (check_sorted(all) && (all->size_b == 0))
-		ft_putstr_fd("\e[1;32mOK\n\e[0m", 2);
+		ft_putstr_fd("\e[1;32mOK\n\e[0m", 1);
 	else
-		ft_putstr_fd("\e[1;31mKO\n\e[0m", 2);
+		ft_putstr_fd("\e[1;31mKO\n\e[0m", 1);
 }
