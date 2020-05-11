@@ -12,7 +12,7 @@
 
 #ifndef CHECKER_H
 # define CHECKER_H
-# define MAXINT 2147483648
+# define MAXINT 2147483647
 # define TOKEN_STR 0
 # define TOKEN_INT 1
 
@@ -24,8 +24,8 @@ typedef struct		s_all
 {
 	char			**args;
 	char			*line;
-	unsigned int	*int_stack_a;
-	unsigned int	*int_stack_b;
+	int				*int_stack_a;
+	int				*int_stack_b;
 	unsigned int	size;
 	unsigned int	size_a;
 	unsigned int	size_b;
