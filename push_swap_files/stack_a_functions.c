@@ -40,7 +40,6 @@ static int	over_median(t_stack *a, int median, int *places)
 	while (counter--)
 	{
 		rotate(&a->head, &a->tail);
-		// ft_strcat(command, "ra\n");
 		ft_putstr("ra\n");
 	}
 	return (1);
@@ -64,7 +63,6 @@ void		work_stack_a(t_stack *a, t_stack *b, int median)
 		if (a->head->value <= median)
 		{
 			push(&a->head, &b->head, &b->tail);
-			// ft_strcat(command, "pb\n");
 			ft_putstr("pb\n");
 		}
 		else if (!(over_median(a, median, &places_moved)))
@@ -73,7 +71,6 @@ void		work_stack_a(t_stack *a, t_stack *b, int median)
 	while (a->sub_lst[a->start] && --places_moved >= 0)
 	{
 		rev_rotate(&a->head, &a->tail);
-		// ft_strcat(command, "rra\n");
 		ft_putstr("rra\n");
 	}
 }
@@ -93,20 +90,17 @@ static void	operations_stack_a(t_stack *a)
 			&& a->head->next->value > a->head->value)
 		{
 			rev_rotate(&a->head, &a->tail);
-			// ft_strcat(command, "rra\n");
 			ft_putstr("rra\n");
 		}
 		else
 		{
 			rotate(&a->head, &a->tail);
-			// ft_strcat(command, "ra\n");
 			ft_putstr("ra\n");
 		}
 	}
 	if (!(a->head->next->value < a->head->value))
 		return ;
 	swap(&a->head);
-	// ft_strcat(command, "sa\n");
 	ft_putstr("sa\n");
 }
 
@@ -127,13 +121,11 @@ void		moves_on_stack_a(t_stack *a, t_stack *b, int count)
 			{
 				swap(&a->head);
 				swap(&b->head);
-				// ft_strcat(command, "ss\n");
 				ft_putstr("ss\n");
 			}
 			else
 			{
 				swap(&a->head);
-				// ft_strcat(command, "sa\n");
 				ft_putstr("sa\n");
 			}
 		}
