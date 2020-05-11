@@ -20,7 +20,6 @@ int		main(int ac, char **av)
 {
 	t_stack	a;
 	t_stack	b;
-	// t_list	*command;
 
 	choose_stack(&a, &b, av, ac);
 	if (!(a.sub_lst = malloc(sizeof(t_lst*) * a.argc_temp)) ||
@@ -32,13 +31,6 @@ int		main(int ac, char **av)
 	b.start = 0;
 	a.sub_lst[a.start] = NULL;
 	b.sub_lst[a.start] = NULL;
-	// command = solver(&a, &b);
 	solver(&a, &b);
-	// while (command != NULL)
-	// {
-	// 	ft_putstr((char *)command->content);
-	// 	command = command->next;
-	// }
-	// free_list(command);
 	return (0);
 }
