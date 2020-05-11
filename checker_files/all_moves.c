@@ -16,9 +16,9 @@
 **To swap two values, or rather their memory addresses, to be more specific.
 */
 
-static void	swap(unsigned int *a, unsigned int *b)
+static void	swap(int *a, int *b)
 {
-	unsigned int tmp;
+	int tmp;
 
 	tmp = *a;
 	*a = *b;
@@ -34,9 +34,9 @@ static void	swap(unsigned int *a, unsigned int *b)
 
 void		sa(t_all *all)
 {
-	if (all->int_stack_a[0] < MAXINT)
+	if (all->int_stack_a[0] <= MAXINT)
 	{
-		if (all->int_stack_a[1] < MAXINT)
+		if (all->int_stack_a[1] <= MAXINT)
 		{
 			swap(&all->int_stack_a[0], &all->int_stack_a[1]);
 		}
@@ -45,9 +45,9 @@ void		sa(t_all *all)
 
 void		sb(t_all *all)
 {
-	if (all->int_stack_b[0] < MAXINT)
+	if (all->int_stack_b[0] <= MAXINT)
 	{
-		if (all->int_stack_b[1] < MAXINT)
+		if (all->int_stack_b[1] <= MAXINT)
 		{
 			swap(&all->int_stack_b[0], &all->int_stack_b[1]);
 		}
@@ -70,13 +70,13 @@ void		ss(t_all *all)
 void		ra(t_all *all)
 {
 	unsigned int i;
-	unsigned int tmp;
+	int tmp;
 
 	i = -1;
 	tmp = all->int_stack_a[0];
-	if (all->int_stack_a[0] < MAXINT)
+	if (all->int_stack_a[0] <= MAXINT)
 	{
-		if (all->int_stack_a[1] < MAXINT)
+		if (all->int_stack_a[1] <= MAXINT)
 		{
 			while (++i < all->size_a - 1)
 				all->int_stack_a[i] = all->int_stack_a[i + 1];
@@ -88,13 +88,13 @@ void		ra(t_all *all)
 void		rb(t_all *all)
 {
 	unsigned int i;
-	unsigned int tmp;
+	int tmp;
 
 	i = -1;
 	tmp = all->int_stack_b[0];
-	if (all->int_stack_b[0] < MAXINT)
+	if (all->int_stack_b[0] <= MAXINT)
 	{
-		if (all->int_stack_b[1] < MAXINT)
+		if (all->int_stack_b[1] <= MAXINT)
 		{
 			while (++i < all->size_b - 1)
 				all->int_stack_b[i] = all->int_stack_b[i + 1];
@@ -120,9 +120,9 @@ void		rra(t_all *all)
 {
 	unsigned int i;
 	
-	if (all->int_stack_a[0] < MAXINT)
+	if (all->int_stack_a[0] <= MAXINT)
 	{
-		if (all->int_stack_a[1] < MAXINT)
+		if (all->int_stack_a[1] <= MAXINT)
 		{
 			i = all->size_a;
 			while (--i > 0)
@@ -135,9 +135,9 @@ void		rrb(t_all *all)
 {
 	unsigned int i;
 
-	if (all->int_stack_b[0] < MAXINT)
+	if (all->int_stack_b[0] <= MAXINT)
 	{
-		if (all->int_stack_b[1] < MAXINT)
+		if (all->int_stack_b[1] <= MAXINT)
 		{
 			i = all->size_b;
 			while (--i > 0)
