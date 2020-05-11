@@ -18,7 +18,7 @@ void	free_all(t_all *all)
 		ft_array_free(&all->args);
 	if (all->int_stack_a)
 		free(all->int_stack_a);
-	if (all->int_stack_b)
-		free(all->int_stack_b);
+	// if (all->int_stack_b)
+		// free(all->int_stack_b);
 	free(all);
 }
