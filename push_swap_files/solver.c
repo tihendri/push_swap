@@ -39,9 +39,7 @@ static int	send_from_stack_a(t_stack *a, t_stack *b)
 {
 	int		count;
 	long	median;
-	// char	temp[a->argc * 4];
 
-	// temp[0] = '\0';
 	count = get_count(a);
 	median = NO_MEDIAN;
 	if (count <= 7 && count > 2)
@@ -52,8 +50,6 @@ static int	send_from_stack_a(t_stack *a, t_stack *b)
 		work_stack_a(a, b, (int)median);
 	else
 		moves_on_stack_a(a, b, count);
-	// if (temp[0])
-	// 	ft_lstaddtail(command, ft_lstnew_str(temp));
 	if (median == NO_MEDIAN)
 		a->sub_lst[++(a->start)] = a->head;
 	return ((median == NO_MEDIAN) ? 1 : 0);
@@ -68,7 +64,6 @@ static void	push_from_b(t_stack *b, t_stack *a, int count)
 	while (i++ < count)
 	{
 		push(&b->head, &a->head, &a->tail);
-		// ft_strcat(temp, "pa\n");
 		ft_putstr("pa\n");
 	}
 }
@@ -84,9 +79,7 @@ static void	send_from_stack_b(t_stack *a, t_stack *b)
 {
 	int		count;
 	long	median;
-	// char	temp[a->argc * 4];
 
-	// temp[0] = '\0';
 	count = get_count(b);
 	median = NO_MEDIAN;
 	if (count <= 6 && count > 2)
@@ -99,13 +92,10 @@ static void	send_from_stack_b(t_stack *a, t_stack *b)
 		moves_on_stack_b(a, b, count);
 	if (median == NO_MEDIAN)
 		push_from_b(b, a, count);
-	// if (temp[0])
-	// 	ft_lstaddtail(command, ft_lstnew_str(temp));
 }
 
 void		solver(t_stack *a, t_stack *b)
 {
-	// t_list	*command;
 	int		ret;
 	int		sort;
 
@@ -114,7 +104,6 @@ void		solver(t_stack *a, t_stack *b)
 		free_stacks(a, b);
 		exit(0);
 	}
-	// command = ft_lstnew((void *)"\0", 1);
 	while (!(sort = sorted(a)) || b->head != NULL)
 	{
 		if (!sort)
