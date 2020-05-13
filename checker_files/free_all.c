@@ -16,5 +16,7 @@ void	free_all(t_all *all)
 {
 	if (all->args && all->token == TOKEN_STR)
 		ft_array_free(&all->args);
+	if (all->int_stack_a)
+		free(all->int_stack_a);
 	free(all);
 }
