@@ -49,6 +49,7 @@ echo "<***************| Push_Swap Simple Test |***************>"
 	fi	
 	echo "${BLUE}${BOLD}${CHECKER_SAYS}${NC}"
 	RES=$(./push_swap $ARG | ./checker $ARG)
+	echo "${RES}"
 	echo "\n"
 	echo "Number of operations: ${GREEN}${BOLD}${NUM}${NC}"
 	echo "Limit of operations: ${RED}${BOLD}${LIMIT_ONE}${NC}\n"
@@ -79,6 +80,7 @@ echo "<***************| Push_Swap Moderate Test |***************>"
 	fi
 	echo "${BLUE}${BOLD}${CHECKER_SAYS}${NC}"
 	RES=$(./push_swap $ARG | ./checker $ARG)
+	echo "${RES}"
 	echo "\n"
 	echo "Number of operations: ${GREEN}${BOLD}${NUM}${NC}"
 	echo "Limit of operations: ${RED}${BOLD}${LIMIT_TWO}${NC}\n"
@@ -109,6 +111,7 @@ echo "<***************| Push_Swap Advanced Test |***************>"
 	fi
 	echo "${BLUE}${BOLD}${CHECKER_SAYS}${NC}"
 	RES=$(./push_swap $ARG | ./checker $ARG)
+	echo "${RES}"
 	echo "\n"
 	echo "Number of operations: ${GREEN}${BOLD}${NUM}${NC}"
 	echo "Limit of operations: ${RED}${BOLD}${LIMIT_THREE}${NC}\n"
